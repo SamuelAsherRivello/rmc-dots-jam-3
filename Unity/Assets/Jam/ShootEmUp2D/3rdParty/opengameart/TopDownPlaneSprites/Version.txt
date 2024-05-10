@@ -1,0 +1,5 @@
+Source Url: 
+* https://opengameart.org/content/top-down-planes-sprites-pack
+
+Changelog: 
+* Moved to .../3rdParty/

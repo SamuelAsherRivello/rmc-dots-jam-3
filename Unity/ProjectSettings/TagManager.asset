@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - PlayerEyes
+  - Pick Up
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Player
+  - Pickup
+  - Projectile
+  - Goal
+  - Bullet
+  - Enemy
+  - Wall
+  - Gem
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 879789307
+    locked: 0
+  - name: Shadows
+    uniqueID: 454371931
+    locked: 0
+  - name: Player
+    uniqueID: 1173494807
+    locked: 0
+  - name: Enemies
+    uniqueID: 1957600561
+    locked: 0
+  - name: Pickups
+    uniqueID: 812206027
+    locked: 0
+  - name: Bullets
+    uniqueID: 2293107429
+    locked: 0
+  - name: Clouds
+    uniqueID: 2839610539
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  - Light Layer 1
+  - Light Layer 2
+  - Light Layer 3
+  - Light Layer 4
+  - Light Layer 5
+  - Light Layer 6
+  - Light Layer 7
