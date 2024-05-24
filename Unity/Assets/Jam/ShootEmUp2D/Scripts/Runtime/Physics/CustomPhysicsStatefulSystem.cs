@@ -66,7 +66,6 @@ namespace Unity.Physics.PhysicsStateful
             //
             _tempPitchCount++;
             
-            
             var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().
                 CreateCommandBuffer(state.WorldUnmanaged);
             
@@ -126,7 +125,7 @@ namespace Unity.Physics.PhysicsStateful
                         
                         if (_playerBulletTagLookup.HasComponent(otherEntity))
                         {
-                            Debug.Log("Enemy hit by bullet");
+                            Debug.Log("1. Enemy was Hit By Bullet at FrameCount = " + Time.frameCount);
                             
                             // Play sound
                             float[] pitches = { 0.8f, 1.0f };
@@ -134,7 +133,7 @@ namespace Unity.Physics.PhysicsStateful
                             var audioEntity = ecb.CreateEntity();
                             ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
                             (
-                                "GunHit01",
+                                "GunHit02",
                                 AudioConstants.VolumeDefault,
                                 pitch
                             ));

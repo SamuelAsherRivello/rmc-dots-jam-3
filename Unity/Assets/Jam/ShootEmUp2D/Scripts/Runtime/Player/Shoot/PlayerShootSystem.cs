@@ -3,10 +3,8 @@ using RMC.DOTS.SystemGroups;
 using RMC.DOTS.Systems.Audio;
 using RMC.DOTS.Systems.GameState;
 using RMC.DOTS.Systems.Input;
-using RMC.DOTS.Systems.PhysicsVelocityImpulse;
 using RMC.DOTS.Systems.Player;
 using Unity.Entities;
-using Unity.Transforms;
 
 namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 {
@@ -46,6 +44,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             
             var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().
                 CreateCommandBuffer(state.WorldUnmanaged);
+            
             float deltaTime = SystemAPI.Time.DeltaTime;
             
             foreach (var playerShootAspect 

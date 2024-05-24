@@ -1,5 +1,4 @@
-﻿
-using RMC.DOTS.SystemGroups;
+﻿using RMC.DOTS.SystemGroups;
 using RMC.DOTS.Systems.Input;
 using RMC.DOTS.Systems.Player;
 using Unity.Burst;
