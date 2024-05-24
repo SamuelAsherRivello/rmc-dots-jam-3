@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3721317070430586114}
   - component: {fileID: 1710891036720127906}
   - component: {fileID: 1952408193462462555}
+  - component: {fileID: -1176639490386674444}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -311,3 +312,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _physicsBodyAuthoring: {fileID: 3409344557983688220}
   _physicsShapeAuthoring: {fileID: 3721317070430586114}
+--- !u!114 &-1176639490386674444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701181624954122511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce42e236f924b64fa1b583a91358ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthMax: 100
+  HealthCurrent: 100

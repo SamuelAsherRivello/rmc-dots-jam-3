@@ -111,7 +111,11 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
         private async Task InitializeAsync()
         {
             await DOTSUtility.IsWorldReadyAsync(_subScene);
-            _gameStateSystem.GameState = GameState.Initializing;
+
+            if (_gameStateSystem != null)
+            {
+                _gameStateSystem.GameState = GameState.Initializing;
+            }
         }
 
         

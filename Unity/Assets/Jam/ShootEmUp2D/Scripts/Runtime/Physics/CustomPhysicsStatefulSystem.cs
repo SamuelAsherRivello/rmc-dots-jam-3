@@ -1,4 +1,8 @@
 using RMC.DOTS.Samples.Games.ShootEmUp2D;
+using RMC.DOTS.Systems.Audio;
+using RMC.DOTS.Systems.Destroyable;
+using RMC.DOTS.Systems.DestroyEntity;
+using RMC.DOTS.Systems.Health;
 using RMC.DOTS.Systems.Player;
 using Unity.Burst;
 using Unity.Entities;
@@ -18,11 +22,15 @@ namespace Unity.Physics.PhysicsStateful
         
         // Things ENEMY might hit (Excluding PLAYER)
         private ComponentLookup<PlayerBulletTag> _playerBulletTagLookup;
+        
+        // Destroy
+        private ComponentLookup<DestroyEntityComponent> _destroyEntityComponentLookup;
 
 
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
+            state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
             state.RequireForUpdate<CustomPhysicsStatefulSystemAuthoring.CustomPhysicsStatefulSystemIsEnabledTag>();
             state.RequireForUpdate<PhysicsStatefulSystemAuthoring.TriggerSystemIsEnabledIsEnabledTag>();
 
@@ -30,6 +38,7 @@ namespace Unity.Physics.PhysicsStateful
             _enemyBulletTagLookup = state.GetComponentLookup<EnemyBulletTag>();
             _enemyTagLookup = state.GetComponentLookup<EnemyTag>();
             _playerBulletTagLookup = state.GetComponentLookup<PlayerBulletTag>();
+            _destroyEntityComponentLookup = state.GetComponentLookup<DestroyEntityComponent>();
         }
 
         [BurstCompile]
@@ -39,10 +48,14 @@ namespace Unity.Physics.PhysicsStateful
             _enemyBulletTagLookup.Update(ref state);
             _enemyTagLookup.Update(ref state);
             _playerBulletTagLookup.Update(ref state);
+            _destroyEntityComponentLookup.Update(ref state);
+            
+            var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().
+                CreateCommandBuffer(state.WorldUnmanaged);
             
             ///////////////////////////////////////
             // 1. Player Detecting Other Things...
-            foreach (var (dynamicBuffer, entity) in 
+            foreach (var (dynamicBuffer, playerEntity) in 
                      SystemAPI.Query<DynamicBuffer<StatefulTriggerEvent>>().
                          WithAll<PlayerTag>().
                          WithEntityAccess())
@@ -52,7 +65,7 @@ namespace Unity.Physics.PhysicsStateful
                     StatefulTriggerEvent statefulTriggerEvent = dynamicBuffer[bufferIndex];
                     if (statefulTriggerEvent.State == StatefulEventState.Enter)
                     {
-                        var otherEntity = statefulTriggerEvent.GetOtherEntity(entity);
+                        var otherEntity = statefulTriggerEvent.GetOtherEntity(playerEntity);
                         
                         // Player hit Pickup
                         if (_pickupTagLookup.HasComponent(otherEntity))
@@ -69,7 +82,9 @@ namespace Unity.Physics.PhysicsStateful
                         // Player hit EnemyBullet
                         if (_enemyBulletTagLookup.HasComponent(otherEntity))
                         {
-                            Debug.Log("Player Hit Enemy Bullet");
+                            //Remove bullet
+                            DestroyableEntityUtility.DestroyEntityImmediately(ecb, _destroyEntityComponentLookup, otherEntity);
+                           
                         }
                         
                         // Great info via debug tooling
@@ -80,7 +95,7 @@ namespace Unity.Physics.PhysicsStateful
             
             ///////////////////////////////////////
             // 2. Enemy Detecting Other Things...
-            foreach (var (dynamicBuffer, entity) in 
+            foreach (var (dynamicBuffer, enemyEntity) in 
                      SystemAPI.Query<DynamicBuffer<StatefulTriggerEvent>>().
                          WithAll<EnemyTag>().
                          WithEntityAccess())
@@ -90,13 +105,21 @@ namespace Unity.Physics.PhysicsStateful
                     StatefulTriggerEvent statefulTriggerEvent = dynamicBuffer[bufferIndex];
                     if (statefulTriggerEvent.State == StatefulEventState.Enter)
                     {
-                        var otherEntity = statefulTriggerEvent.GetOtherEntity(entity);
+                        var otherEntity = statefulTriggerEvent.GetOtherEntity(enemyEntity);
                         
                         if (_playerBulletTagLookup.HasComponent(otherEntity))
                         {
-                            Debug.Log("Enemy hit player bullets");
+                            // Play sound
+                            var audioEntity = ecb.CreateEntity();
+                            ecb.AddComponent<AudioComponent>(audioEntity, AudioComponent2.FromAudioClipName("Click01"));
+                            
+                            // Damage enemy
+                            ecb.AddComponent<HealthChangeExecuteOnceComponent>(enemyEntity, HealthChangeExecuteOnceComponent.FromHealthChangeBy(-35));
+                            
+                            //Remove bullet
+                            DestroyableEntityUtility.DestroyEntityImmediately(ecb, _destroyEntityComponentLookup, otherEntity);
+                            
                         }
-                        
                         
                         // Great info via debug tooling
                         //PhysicsStatefulDebugSystem.LogEvent(ref state, entity, bufferIndex, statefulTriggerEvent);
@@ -104,5 +127,7 @@ namespace Unity.Physics.PhysicsStateful
                 }
             }
         }
+
+ 
     }
 }

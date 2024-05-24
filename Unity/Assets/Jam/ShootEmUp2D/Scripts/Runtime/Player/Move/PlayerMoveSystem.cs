@@ -1,4 +1,5 @@
-﻿using RMC.DOTS.SystemGroups;
+﻿
+using RMC.DOTS.SystemGroups;
 using RMC.DOTS.Systems.Input;
 using RMC.DOTS.Systems.Player;
 using Unity.Burst;
@@ -6,7 +7,6 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Physics.Extensions;
-using UnityEngine;
 
 namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 {

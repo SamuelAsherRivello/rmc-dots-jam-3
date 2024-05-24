@@ -45,8 +45,8 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                 return;
             }
             
-            var ecbSingleton = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>();
-            var ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
+            var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().
+                CreateCommandBuffer(state.WorldUnmanaged);
             float deltaTime = SystemAPI.Time.DeltaTime;
             
             foreach (var playerShootAspect 
