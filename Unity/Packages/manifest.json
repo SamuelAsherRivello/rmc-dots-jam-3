@@ -2,6 +2,7 @@
   "dependencies": {
     "com.rmc.rmc-dots": "https://github.com/SamuelAsherRivello/rmc-dots.git",
     "com.unity.2d.sprite": "1.0.0",
+    "com.unity.cinemachine": "2.10.0",
     "com.unity.collab-proxy": "2.3.1",
     "com.unity.entities.graphics": "1.2.1",
     "com.unity.ide.rider": "3.0.28",
@@ -13,6 +14,7 @@
     "com.unity.timeline": "1.8.6",
     "com.unity.toolchain.win-x86_64-linux-x86_64": "2.0.9",
     "com.unity.ugui": "2.0.0",
+    "com.unity.visualeffectgraph": "17.0.3",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",

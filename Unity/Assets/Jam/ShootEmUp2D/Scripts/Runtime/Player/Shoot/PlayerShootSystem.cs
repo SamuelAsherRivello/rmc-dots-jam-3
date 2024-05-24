@@ -1,4 +1,5 @@
-﻿using RMC.DOTS.SystemGroups;
+﻿using RMC.Audio.Data.Types;
+using RMC.DOTS.SystemGroups;
 using RMC.DOTS.Systems.Audio;
 using RMC.DOTS.Systems.GameState;
 using RMC.DOTS.Systems.Input;
@@ -12,6 +13,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
     [UpdateInGroup(typeof(UnpauseablePresentationSystemGroup))]
     public partial struct PlayerShootSystem : ISystem
     {
+        //TODO: Make a better way to 'have any system increment a counter' (Put in RandomComponent?)
         private int _tempPitchCount;
         
         public void OnCreate(ref SystemState state)
@@ -52,15 +54,15 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                 if (!playerShootAspect.TryShoot(ref ecb, SystemAPI.Time))
                     continue;
                 
-                float[] pitches = { 0.5f, 1, 1.5f };
-                float pitch = pitches[++_tempPitchCount % 3];
+                float[] pitches = { 0.8f, 0.9f, 1.0f, 1.1f };
+                float pitch = pitches[++_tempPitchCount % 4];
 
                 // Play sound
                 var audioEntity = ecb.CreateEntity();
                 ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
                 (
-                    "Click01",
-                    1,
+                    "GunShot01",
+                    AudioConstants.VolumeDefault,
                     pitch
                 ));
             }

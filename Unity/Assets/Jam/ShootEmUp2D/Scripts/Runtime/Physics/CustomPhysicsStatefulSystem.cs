@@ -1,11 +1,14 @@
+using RMC.Audio.Data.Types;
 using RMC.DOTS.Samples.Games.ShootEmUp2D;
 using RMC.DOTS.Systems.Audio;
 using RMC.DOTS.Systems.Destroyable;
 using RMC.DOTS.Systems.DestroyEntity;
 using RMC.DOTS.Systems.Health;
 using RMC.DOTS.Systems.Player;
+using RMC.DOTS.Systems.VFX;
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Transforms;
 using UnityEngine;
 
 namespace Unity.Physics.PhysicsStateful
@@ -15,6 +18,9 @@ namespace Unity.Physics.PhysicsStateful
     [UpdateAfter(typeof(StatefulTriggerEventSystem))] 
     public partial struct CustomPhysicsStatefulSystem : ISystem
     {
+        //TODO: Make a better way to 'have any system increment a counter' (Put in RandomComponent?)
+        private int _tempPitchCount;
+        
         // Things PLAYER might hit (Including ENEMY)
         private ComponentLookup<PickupTag> _pickupTagLookup;
         private ComponentLookup<EnemyBulletTag> _enemyBulletTagLookup;
@@ -25,6 +31,8 @@ namespace Unity.Physics.PhysicsStateful
         
         // Destroy
         private ComponentLookup<DestroyEntityComponent> _destroyEntityComponentLookup;
+        private ComponentLookup<VFXEmitterComponent> _vfxEmitterComponentLookup;
+        private ComponentLookup<LocalTransform> _localTransformLookup;
 
 
         [BurstCompile]
@@ -39,6 +47,9 @@ namespace Unity.Physics.PhysicsStateful
             _enemyTagLookup = state.GetComponentLookup<EnemyTag>();
             _playerBulletTagLookup = state.GetComponentLookup<PlayerBulletTag>();
             _destroyEntityComponentLookup = state.GetComponentLookup<DestroyEntityComponent>();
+            _vfxEmitterComponentLookup = state.GetComponentLookup<VFXEmitterComponent>();
+            _localTransformLookup = state.GetComponentLookup<LocalTransform>();
+
         }
 
         //No burst due to use of string -- [BurstCompile]
@@ -49,6 +60,12 @@ namespace Unity.Physics.PhysicsStateful
             _enemyTagLookup.Update(ref state);
             _playerBulletTagLookup.Update(ref state);
             _destroyEntityComponentLookup.Update(ref state);
+            _vfxEmitterComponentLookup.Update(ref state);
+            _localTransformLookup.Update(ref state);
+            
+            //
+            _tempPitchCount++;
+            
             
             var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().
                 CreateCommandBuffer(state.WorldUnmanaged);
@@ -112,15 +129,30 @@ namespace Unity.Physics.PhysicsStateful
                             Debug.Log("Enemy hit by bullet");
                             
                             // Play sound
+                            float[] pitches = { 0.8f, 1.0f };
+                            float pitch = pitches[++_tempPitchCount % 2];
                             var audioEntity = ecb.CreateEntity();
-                            ecb.AddComponent<AudioComponent>(audioEntity, AudioComponent2.FromAudioClipName("Click01"));
+                            ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
+                            (
+                                "GunHit01",
+                                AudioConstants.VolumeDefault,
+                                pitch
+                            ));
+                            
                             
                             // Damage enemy
                             healthComponentAspect.HealthChangeBy(ecb,-35);
-                          
+                            
+                            //Make bullet FX
+                            var vfxEmitterComponent = _vfxEmitterComponentLookup.GetRefRW(otherEntity);
+                            VFXEmitterComponentUtility.Emit(
+                                ecb, 
+                                vfxEmitterComponent.ValueRO.Prefab, 
+                                _localTransformLookup.GetRefRO(otherEntity).ValueRO.Position);
+                            
                             //Remove bullet
                             DestroyableEntityUtility.DestroyEntityImmediately(ecb, _destroyEntityComponentLookup, otherEntity);
-                            
+
                         }
                         
                     }

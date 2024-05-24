@@ -10,14 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8af061af9280c2848890866508270d2f, type: 3}
-  m_Name: AudioManagerConfigurationDOTSTemplate
+  m_Name: AudioManagerConfiguration_ShootEmUp
   m_EditorClassIdentifier: 
   _audioMixer: {fileID: 24100000, guid: 1938ea5a2248a394eaf9ed6ca93191fe, type: 2}
   _audioClips:
   - {fileID: 8300000, guid: 62f6af78d30ce89419917fd792314a33, type: 3}
   - {fileID: 8300000, guid: 55d871e47f187464987cf682fd248b2b, type: 3}
   - {fileID: 8300000, guid: 151a3ac69bf6f064daf4b58aec1c556e, type: 3}
+  - {fileID: 8300000, guid: e7d69dd7bf6722b47a3d27e5f5ee39d3, type: 3}
+  - {fileID: 8300000, guid: d798a92f9f86b154598a423a1b8e8b5c, type: 3}
+  - {fileID: 8300000, guid: 63e105f3524fc2e409e1ede58fa152c0, type: 3}
+  - {fileID: 8300000, guid: 75f651971c1dfa246b7845a3319cf182, type: 3}
+  - {fileID: 8300000, guid: b710767122ee9da4f95b99d34d4169c3, type: 3}
   - {fileID: 8300000, guid: eeeaad2d203280247a3013f12f3ea7be, type: 3}
+  - {fileID: 8300000, guid: 5d9e70d3477f4764c9a89e97a14b4483, type: 3}
   - {fileID: 8300000, guid: 0a1bca1e24b37cc4cb2a662d3552b60e, type: 3}
   - {fileID: 8300000, guid: 03c017c01f32982419ea7bf70476bf06, type: 3}
   - {fileID: 8300000, guid: 231a11a8b92151d4d8af3c8eaef8744e, type: 3}
