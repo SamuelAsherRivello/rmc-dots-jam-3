@@ -1,16 +1,14 @@
 ﻿using RMC.DOTS.SystemGroups;
 using RMC.DOTS.Systems.DestroyEntity;
+using RMC.DOTS.Systems.Health;
 using Unity.Burst;
 using Unity.Entities;
-using UnityEngine;
 
-namespace RMC.DOTS.Systems.Health
+namespace RMC.DOTS.Samples.Games.ShootEmUp2D.Health
 {
-    /// <summary>
-    /// Changes <see cref="HealthComponent"/> depending on <see cref="HealthChangeExecuteOnceComponent"/>
-    /// </summary>
     [UpdateInGroup(typeof(UnpauseablePresentationSystemGroup))]
-    public partial struct HealthComponentSystem : ISystem
+    [UpdateAfter(typeof(HealthComponentSystem))]
+    public partial struct CustomHealthComponentSystem : ISystem
     {
         public void OnCreate(ref SystemState state)
         {
@@ -23,20 +21,22 @@ namespace RMC.DOTS.Systems.Health
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().
-                CreateCommandBuffer(state.WorldUnmanaged);
-            
-            foreach (var (healthComponentAspect, entity) in 
+            var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
+                .CreateCommandBuffer(state.WorldUnmanaged);
+
+            foreach (var (healthComponentAspect, entity) in
                      SystemAPI.Query<HealthComponentAspect>().
                          WithEntityAccess())
 
             {
                 
-                // 1. SET STATE
+                // 2. GET STATE
                 if (healthComponentAspect.HasHealthChangeThisFrame())
                 {
-                    healthComponentAspect.ProcessHealthChangeThisFrame();
-                    healthComponentAspect.RemoveHealthChangeThisFrame(ecb);
+                    if (healthComponentAspect.HealthCurrent <= healthComponentAspect.HealthMin)
+                    {
+                        ecb.AddComponent<DestroyEntityComponent>(entity);
+                    }
                 }
             }
         }

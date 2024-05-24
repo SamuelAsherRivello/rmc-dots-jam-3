@@ -20,14 +20,14 @@ namespace RMC.DOTS.Systems.Health
         
         //  Methods ---------------------------------------
 
-        public bool HasHealthChangeExecuteOnceComponent()
+        public bool HasHealthChangeThisFrame()
         {
             return _healthChangeExecuteOnceComponentRefRO.IsValid;
         }
 
-        public void ProcessHealthChangeExecuteOnceComponent()
+        public void ProcessHealthChangeThisFrame()
         {
-           if (!HasHealthChangeExecuteOnceComponent())
+           if (!HasHealthChangeThisFrame())
            {
                return;
            }
@@ -43,9 +43,9 @@ namespace RMC.DOTS.Systems.Health
         }
 
 
-        public void RemoveHealthChangeExecuteOnceComponent(EntityCommandBuffer ecb)
+        public void RemoveHealthChangeThisFrame(EntityCommandBuffer ecb)
         {
-            if (!HasHealthChangeExecuteOnceComponent())
+            if (!HasHealthChangeThisFrame())
             {
                 return;
             }
@@ -54,7 +54,8 @@ namespace RMC.DOTS.Systems.Health
 
         public void HealthChangeBy(EntityCommandBuffer ecb, float healthChangeBy)
         {
-            ecb.AddComponent<HealthChangeExecuteOnceComponent>(_entity, HealthChangeExecuteOnceComponent.FromHealthChangeBy(healthChangeBy));
+            ecb.AddComponent<HealthChangeExecuteOnceComponent>(_entity, 
+                HealthChangeExecuteOnceComponent.FromHealthChangeBy(healthChangeBy));
 
         }
     }
