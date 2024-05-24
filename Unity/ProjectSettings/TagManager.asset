@@ -46,19 +46,19 @@ TagManager:
   - name: Background
     uniqueID: 879789307
     locked: 0
-  - name: Shadows
+  - name: Shadow
     uniqueID: 454371931
     locked: 0
   - name: Player
     uniqueID: 1173494807
     locked: 0
-  - name: Enemies
+  - name: Enemy
     uniqueID: 1957600561
     locked: 0
-  - name: Pickups
+  - name: Pickup
     uniqueID: 812206027
     locked: 0
-  - name: Bullets
+  - name: Bullet
     uniqueID: 2293107429
     locked: 0
   - name: Clouds

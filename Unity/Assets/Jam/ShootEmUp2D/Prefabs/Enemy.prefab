@@ -12,13 +12,10 @@ GameObject:
   - component: {fileID: 846473980130941947}
   - component: {fileID: 3409344557983688220}
   - component: {fileID: 3721317070430586114}
+  - component: {fileID: 1710891036720127906}
   - component: {fileID: 1952408193462462555}
-  - component: {fileID: 5131182611400800448}
-  - component: {fileID: 8680275794225782190}
-  - component: {fileID: 1501033300280689068}
-  - component: {fileID: -4715295558423553248}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.18, y: 0.5, z: -0.000000046671488}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.044169612, y: 0.05, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,10 +77,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1173494807
-  m_SortingLayer: 3
+  m_SortingLayerID: 1957600561
+  m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2240c471959e72b44be4a6d405d9f238, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b074002de1a5ad4d9b29d3c28bcca87, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -184,7 +181,7 @@ MonoBehaviour:
   m_SphereRadius: 0.5
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
-    m_SimplificationTolerance: 0.016874999
+    m_SimplificationTolerance: 0.015
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
   m_CustomMesh: {fileID: 0}
@@ -208,13 +205,13 @@ MonoBehaviour:
     m_BelongsToCategories:
       m_Override: 0
       m_Value:
-        Category00: 1
+        Category00: 0
         Category01: 0
         Category02: 0
         Category03: 0
         Category04: 0
         Category05: 0
-        Category06: 0
+        Category06: 1
         Category07: 0
         Category08: 0
         Category09: 0
@@ -247,14 +244,14 @@ MonoBehaviour:
         Category01: 0
         Category02: 0
         Category03: 0
-        Category04: 1
+        Category04: 0
         Category05: 0
-        Category06: 1
+        Category06: 0
         Category07: 0
         Category08: 0
         Category09: 0
-        Category10: 0
-        Category11: 1
+        Category10: 1
+        Category11: 0
         Category12: 0
         Category13: 0
         Category14: 0
@@ -288,6 +285,18 @@ MonoBehaviour:
         Tag07: 0
     m_SerializedVersion: 1
   m_SerializedVersion: 1
+--- !u!114 &1710891036720127906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701181624954122511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe65721c488203499e32c67c6ed6f71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1952408193462462555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,59 +311,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _physicsBodyAuthoring: {fileID: 3409344557983688220}
   _physicsShapeAuthoring: {fileID: 3721317070430586114}
---- !u!114 &5131182611400800448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701181624954122511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af46c130ab9193e4aa7b9a8f561fa2d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LinearSpeed: 7.5
---- !u!114 &8680275794225782190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701181624954122511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 114bab87c96f4364cb311adf392dfb39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 5354429359170866509, guid: 2080f5a49872db749aef8f424020d0f9,
-    type: 3}
-  BulletSpeed: 10
-  BulletFireRate: 0.1
---- !u!114 &1501033300280689068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701181624954122511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdf8891f7e184f298be0aa5f2b41701d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MemberOfLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
---- !u!114 &-4715295558423553248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 701181624954122511}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbcfb4ed9cad6cc4bbd783042aa27acc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

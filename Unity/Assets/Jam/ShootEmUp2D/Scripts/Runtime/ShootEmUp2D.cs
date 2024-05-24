@@ -255,7 +255,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             }
 
             _common.MainUI.ScoreLabel.text =
-                     $"Gems: {gemsCurrent}"; //Don't show "/gemsMax" anymore?
+                     $"Pickups: {gemsCurrent}"; //Don't show "/gemsMax" anymore?
         }
         
         

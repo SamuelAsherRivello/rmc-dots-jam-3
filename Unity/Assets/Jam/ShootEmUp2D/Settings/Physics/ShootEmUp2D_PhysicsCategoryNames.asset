@@ -20,11 +20,11 @@ MonoBehaviour:
   - Pickup
   - Projectile
   - Enemy
-  - Bullet
+  - 
   - Gem
   - Wall
-  - 
-  - 
+  - PlayerBullet
+  - EnemyBullet
   - 
   - 
   - 
