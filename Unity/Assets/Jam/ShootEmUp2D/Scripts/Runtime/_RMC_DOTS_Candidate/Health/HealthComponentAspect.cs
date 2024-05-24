@@ -1,38 +1,61 @@
 ﻿using Unity.Entities;
-using Unity.Mathematics;
-using Unity.Transforms;
+using UnityEngine;
 
-namespace RMC.DOTS.Samples.Games.ShootEmUp2D
+namespace RMC.DOTS.Systems.Health
 {
     readonly partial struct HealthComponentAspect : IAspect
     {
         //  Properties ------------------------------------
-        public Entity BulletPrefab => PlayerShootComponentRefRW.ValueRO.BulletPrefab;
-        public float3 BulletSpeed => PlayerShootComponentRefRW.ValueRO.BulletSpeed;
-        public float BulletFireRate => PlayerShootComponentRefRW.ValueRO.BulletFireRate;
-        public float3 Position => LocalTransformRefRW.ValueRO.Position;
-        public float3 Up => LocalTransformRefRW.ValueRO.Up();
-
+        public float HealthCurrent => _healthComponentRefRW.ValueRO.HealthCurrent;
+        public float HealthMax => _healthComponentRefRW.ValueRO.HealthMax;
+        public float HealthMin => _healthComponentRefRW.ValueRO.HealthMin;
 
         //  Fields ----------------------------------------
-        readonly RefRW<PlayerShootComponent> PlayerShootComponentRefRW;
-        readonly RefRW<LocalTransform> LocalTransformRefRW;
+        private readonly RefRW<HealthComponent> _healthComponentRefRW;
+        private readonly Entity _entity;
+        
+        [Optional]
+        private readonly RefRW<HealthChangeExecuteOnceComponent> _healthChangeExecuteOnceComponentRefRO;
         
         
         //  Methods ---------------------------------------
-        public bool CanShoot(float deltaTime)
+
+        public bool HasHealthChangeExecuteOnceComponent()
         {
-            PlayerShootComponentRefRW.ValueRW._CooldownTimer -= deltaTime;
-            if (PlayerShootComponentRefRW.ValueRO._CooldownTimer <= 0)
-            {
-                return true;
-            }
-            return false;
+            return _healthChangeExecuteOnceComponentRefRO.IsValid;
         }
 
-        public void ResetShootCooldown(float fireRate)
+        public void ProcessHealthChangeExecuteOnceComponent()
         {
-            PlayerShootComponentRefRW.ValueRW._CooldownTimer = fireRate;
+           if (!HasHealthChangeExecuteOnceComponent())
+           {
+               return;
+           }
+           _healthComponentRefRW.ValueRW.HealthCurrent += _healthChangeExecuteOnceComponentRefRO.ValueRO.HealthChangeBy;
+           if (_healthComponentRefRW.ValueRW.HealthCurrent < _healthComponentRefRW.ValueRW.HealthMin)
+           {
+               _healthComponentRefRW.ValueRW.HealthCurrent = _healthComponentRefRW.ValueRW.HealthMin;
+           }
+           if (_healthComponentRefRW.ValueRW.HealthCurrent > _healthComponentRefRW.ValueRW.HealthMax)
+           {
+               _healthComponentRefRW.ValueRW.HealthCurrent = _healthComponentRefRW.ValueRW.HealthMax;
+           }
+        }
+
+
+        public void RemoveHealthChangeExecuteOnceComponent(EntityCommandBuffer ecb)
+        {
+            if (!HasHealthChangeExecuteOnceComponent())
+            {
+                return;
+            }
+            ecb.RemoveComponent<HealthChangeExecuteOnceComponent>(_entity);
+        }
+
+        public void HealthChangeBy(EntityCommandBuffer ecb, float healthChangeBy)
+        {
+            ecb.AddComponent<HealthChangeExecuteOnceComponent>(_entity, HealthChangeExecuteOnceComponent.FromHealthChangeBy(healthChangeBy));
+
         }
     }
 }

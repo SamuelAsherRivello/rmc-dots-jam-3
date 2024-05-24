@@ -41,7 +41,7 @@ namespace Unity.Physics.PhysicsStateful
             _destroyEntityComponentLookup = state.GetComponentLookup<DestroyEntityComponent>();
         }
 
-        [BurstCompile]
+        //No burst due to use of string -- [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             _pickupTagLookup.Update(ref state);
@@ -95,8 +95,8 @@ namespace Unity.Physics.PhysicsStateful
             
             ///////////////////////////////////////
             // 2. Enemy Detecting Other Things...
-            foreach (var (dynamicBuffer, enemyEntity) in 
-                     SystemAPI.Query<DynamicBuffer<StatefulTriggerEvent>>().
+            foreach (var (dynamicBuffer, healthComponentAspect, enemyEntity) in 
+                     SystemAPI.Query<DynamicBuffer<StatefulTriggerEvent>,HealthComponentAspect>().
                          WithAll<EnemyTag>().
                          WithEntityAccess())
             {
@@ -109,25 +109,23 @@ namespace Unity.Physics.PhysicsStateful
                         
                         if (_playerBulletTagLookup.HasComponent(otherEntity))
                         {
+                            Debug.Log("Enemy hit by bullet");
+                            
                             // Play sound
                             var audioEntity = ecb.CreateEntity();
                             ecb.AddComponent<AudioComponent>(audioEntity, AudioComponent2.FromAudioClipName("Click01"));
                             
                             // Damage enemy
-                            ecb.AddComponent<HealthChangeExecuteOnceComponent>(enemyEntity, HealthChangeExecuteOnceComponent.FromHealthChangeBy(-35));
-                            
+                            healthComponentAspect.HealthChangeBy(ecb,-35);
+                          
                             //Remove bullet
                             DestroyableEntityUtility.DestroyEntityImmediately(ecb, _destroyEntityComponentLookup, otherEntity);
                             
                         }
                         
-                        // Great info via debug tooling
-                        //PhysicsStatefulDebugSystem.LogEvent(ref state, entity, bufferIndex, statefulTriggerEvent);
                     }
                 }
             }
         }
-
- 
     }
 }

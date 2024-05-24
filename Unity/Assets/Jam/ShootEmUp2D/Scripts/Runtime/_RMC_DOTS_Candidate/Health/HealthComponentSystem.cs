@@ -26,27 +26,21 @@ namespace RMC.DOTS.Systems.Health
             var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().
                 CreateCommandBuffer(state.WorldUnmanaged);
             
-            foreach (var (healthComponent, healthChangeExecuteOnceComponent, entity) in 
-                     SystemAPI.Query<RefRW<HealthComponent>,RefRO<HealthChangeExecuteOnceComponent>>().
+            foreach (var (healthComponentAspect, entity) in 
+                     SystemAPI.Query<HealthComponentAspect>().
                          WithEntityAccess())
 
             {
-                ecb.RemoveComponent<HealthChangeExecuteOnceComponent>(entity);
-                
-                healthComponent.ValueRW.HealthCurrent += healthChangeExecuteOnceComponent.ValueRO.HealthChangeBy;
-                
-                //TODO: Show red flicker of damage
-                
-                if (healthComponent.ValueRW.HealthCurrent <= 0)
+                if (healthComponentAspect.HasHealthChangeExecuteOnceComponent())
                 {
-                    healthComponent.ValueRW.HealthCurrent = 0;
+                    healthComponentAspect.ProcessHealthChangeExecuteOnceComponent();
+                    healthComponentAspect.RemoveHealthChangeExecuteOnceComponent(ecb);
                     
-                    //TODO: Show explosion
-                   
-                    //Remove entity
-                    ecb.AddComponent<DestroyEntityComponent>(entity);
+                    if (healthComponentAspect.HealthCurrent <= healthComponentAspect.HealthMin)
+                    {
+                        ecb.AddComponent<DestroyEntityComponent>(entity);
+                    }
                 }
-
             }
         }
     }
