@@ -9,9 +9,6 @@ using Unity.Transforms;
 
 namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 {
-    /// <summary>
-    /// This system moves the player in 3D space.
-    /// </summary>
     [UpdateInGroup(typeof(UnpauseablePresentationSystemGroup))]
     public partial struct PlayerShootSystem : ISystem
     {
@@ -50,46 +47,22 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             float deltaTime = SystemAPI.Time.DeltaTime;
             
             foreach (var playerShootAspect 
-                     in SystemAPI.Query<PlayerShootAspect>().WithAll<PlayerTag>())
+                     in SystemAPI.Query<ShootAspect>().WithAll<PlayerTag>())
             {
-                // Check if the player can shoot based on the bullet fire rate
-                if (playerShootAspect.CanShoot(deltaTime))
-                {
-                    // Instantiate the entity
-                    var instanceEntity = ecb.Instantiate(playerShootAspect.BulletPrefab);
-                    
-                    // Move entity to initial position
-                    ecb.SetComponent<LocalTransform>
-                    (
-                        instanceEntity,
-                        LocalTransform.FromPosition(playerShootAspect.Position + playerShootAspect.Up * 1.5f)
-                    );
+                if (!playerShootAspect.TryShoot(ref ecb, SystemAPI.Time))
+                    continue;
+                
+                float[] pitches = { 0.5f, 1, 1.5f };
+                float pitch = pitches[++_tempPitchCount % 3];
 
-                    
-                    // Push entity once
-                    var bulletForce = playerShootAspect.Up * playerShootAspect.BulletSpeed;
-                    ecb.AddComponent<PhysicsVelocityImpulseComponent>
-                        (
-                            instanceEntity,
-                            PhysicsVelocityImpulseComponent.FromForce(bulletForce)
-                        );
-
-                    
-                    float[] pitches = {0.5f, 1, 1.5f};
-                    float pitch = pitches[++_tempPitchCount % 3];
-                    
-                    // Play sound
-                    var audioEntity = ecb.CreateEntity();
-                    ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
-                    (
-                        "Click01",
-                        1,
-                        pitch
-                    ));
-                    
-                    // Update shoot cooldown
-                    playerShootAspect.ResetShootCooldown(playerShootAspect.BulletFireRate);
-                }
+                // Play sound
+                var audioEntity = ecb.CreateEntity();
+                ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
+                (
+                    "Click01",
+                    1,
+                    pitch
+                ));
             }
         }
     }
