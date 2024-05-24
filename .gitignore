@@ -81,3 +81,7 @@ crashlytics-build.properties
 # Visual Studio
 *.vsconfig
 [Uu]nity/.idea/.idea.Unity/.idea/projectSettingsUpdater.xml
+Unity/Assets/Resources/PerformanceTestRunInfo.json
+Unity/Assets/Resources/PerformanceTestRunInfo.json.meta
+Unity/Assets/Resources/PerformanceTestRunSettings.json
+Unity/Assets/Resources/PerformanceTestRunSettings.json.meta
