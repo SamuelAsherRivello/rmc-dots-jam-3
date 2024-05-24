@@ -8,6 +8,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
         public GameObject BulletPrefab;
         public float BulletSpeed = 10;
         public float BulletFireRate = 10;
+        public WeaponType Type = WeaponType.SINGLE_SHOT;
 
         public class WeaponComponentAuthoringBaker : Baker<WeaponComponentAuthoring>
         {
@@ -19,7 +20,8 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                 (
                     GetEntity(authoring.BulletPrefab, TransformUsageFlags.Dynamic),
                     authoring.BulletSpeed,
-                    authoring.BulletFireRate)
+                    authoring.BulletFireRate,
+                    authoring.Type)
                 );
             }
         }

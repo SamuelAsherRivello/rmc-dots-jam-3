@@ -13,6 +13,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
     {
         public float3 WeaponPosition => weaponTransform.ValueRO.Position;
         public float3 WeaponUp => weaponTransform.ValueRO.Up();
+        public float3 WeaponRight => weaponTransform.ValueRO.Right();
 
         readonly RefRW<WeaponComponent> weaponComponent;
         readonly RefRO<LocalTransform> weaponTransform;
@@ -24,7 +25,31 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                 return false;
             }
 
-            SpawnBullet(ref ecb, WeaponPosition + WeaponUp * 1.5f, WeaponUp * weaponComponent.ValueRO.BulletSpeed);
+            float3 upVelocity = WeaponUp * weaponComponent.ValueRO.BulletSpeed;
+            switch (weaponComponent.ValueRO.Type)
+            {
+                case WeaponType.SINGLE_SHOT:
+                    SpawnBullet(ref ecb, WeaponPosition + WeaponUp * 1.5f, upVelocity);
+                    break;
+
+                case WeaponType.SHOTGUN_SPREAD:
+                    int numberOfShotgunBullets = 5;
+                    float angleStep = 180.0f / (float) (numberOfShotgunBullets - 1);
+                    float3 baseLeftPoint = -WeaponRight * 1.0f;
+                    for (int i = 0; i < numberOfShotgunBullets; i++)
+                    {
+                        quaternion spreadRotation = quaternion.RotateZ((float) i * -angleStep * math.TORADIANS);
+                        float3 newPoint = math.mul(spreadRotation, baseLeftPoint);
+                        SpawnBullet(ref ecb, WeaponPosition + newPoint, newPoint * weaponComponent.ValueRO.BulletSpeed);
+                    }
+                    break;
+
+                case WeaponType.TRIPLE_SHOT:
+                    SpawnBullet(ref ecb, WeaponPosition + WeaponUp * 0.5f - WeaponRight * 1.0f, upVelocity);
+                    SpawnBullet(ref ecb, WeaponPosition + WeaponUp * 1.5f, upVelocity);
+                    SpawnBullet(ref ecb, WeaponPosition + WeaponUp * 0.5f + WeaponRight * 1.0f, upVelocity);
+                    break;
+            }
 
             weaponComponent.ValueRW._NextCooldownTime = time.ElapsedTime + weaponComponent.ValueRO.BulletFireRate;
 
@@ -47,6 +72,6 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                 newBulletEntity,
                 PhysicsVelocityImpulseComponent.FromForce(velocity)
             );
-        }   
+        }
     }
 }
