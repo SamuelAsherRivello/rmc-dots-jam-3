@@ -93,7 +93,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             // Populate UI
             RefreshWaveProgressLabel();
             ScoresEventSystem_OnScoresChanged(default(ScoringComponent));
-            _common.MainUI.StatusLabel.text = $"WASD to move\nArrows to shoot";
+            _common.MainUI.StatusLabel.text = $"WASD/Arrows to move\nSpacebar to shoot";
             _common.MainUI.RestartButton.text = "Restart";
             _common.MainUI.WaveTitleLabel.text = "";
             await InitializeAsync();

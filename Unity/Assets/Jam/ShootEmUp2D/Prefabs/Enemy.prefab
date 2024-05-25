@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1710891036720127906}
   - component: {fileID: 1952408193462462555}
   - component: {fileID: -1176639490386674444}
+  - component: {fileID: -738633149000637761}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -161,9 +162,9 @@ MonoBehaviour:
     y: 0
     z: 0
   m_PrimitiveSize:
-    x: 1
+    x: 1.4584391
     y: 0
-    z: 1
+    z: 1.2392063
   m_PrimitiveOrientation:
     Value:
       x: -90
@@ -171,15 +172,15 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 1
-    Radius: 0.5
-    Axis: 2
+    Height: 1.4584391
+    Radius: 0.61960316
+    Axis: 0
   m_Cylinder:
     Height: 0
-    Radius: 0.5
+    Radius: 0.72921956
     Axis: 1
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.5
+  m_SphereRadius: 0.72921956
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
     m_SimplificationTolerance: 0.015
@@ -325,4 +326,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HealthMax: 100
+  HealthMin: 0
   HealthCurrent: 100
+--- !u!114 &-738633149000637761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701181624954122511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0c460f621d04682ba89a95d4844ecda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Prefab: {fileID: 7425059789186097586, guid: ea1a2aa480440ec43aed9a097bbaea11, type: 3}

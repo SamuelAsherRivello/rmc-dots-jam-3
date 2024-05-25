@@ -1,5 +1,4 @@
 using RMC.Audio.Data.Types;
-using RMC.DOTS.Samples.Games.ShootEmUp2D;
 using RMC.DOTS.Systems.Audio;
 using RMC.DOTS.Systems.Destroyable;
 using RMC.DOTS.Systems.DestroyEntity;
@@ -8,10 +7,11 @@ using RMC.DOTS.Systems.Player;
 using RMC.DOTS.Systems.VFX;
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Physics.PhysicsStateful;
 using Unity.Transforms;
 using UnityEngine;
 
-namespace Unity.Physics.PhysicsStateful
+namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 {
     [BurstCompile]
     [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
@@ -33,7 +33,6 @@ namespace Unity.Physics.PhysicsStateful
         private ComponentLookup<DestroyEntityComponent> _destroyEntityComponentLookup;
         private ComponentLookup<VFXEmitterComponent> _vfxEmitterComponentLookup;
         private ComponentLookup<LocalTransform> _localTransformLookup;
-
 
         [BurstCompile]
         public void OnCreate(ref SystemState state)
@@ -87,18 +86,19 @@ namespace Unity.Physics.PhysicsStateful
                         // Player hit Pickup
                         if (_pickupTagLookup.HasComponent(otherEntity))
                         {
-                            Debug.Log("Player Hit Pickup");
+                           // Debug.Log("Player Hit Pickup");
                         }
                         
                         // Player hit Enemy
                         if (_enemyTagLookup.HasComponent(otherEntity))
                         {
-                            Debug.Log("Player Hit Enemy");
+                           // Debug.Log("Player's plane Hit Enemy plane");
                         }
                         
                         // Player hit EnemyBullet
                         if (_enemyBulletTagLookup.HasComponent(otherEntity))
                         {
+            
                             //Remove bullet
                             DestroyableEntityUtility.DestroyEntityImmediately(ecb, _destroyEntityComponentLookup, otherEntity);
                            
@@ -140,12 +140,16 @@ namespace Unity.Physics.PhysicsStateful
                             
                             // Damage enemy
                             healthComponentAspect.HealthChangeBy(ecb,-35);
-                            
+
+                            // Flicker Enemy Color
+                            ecb.AddComponent<FlickerRequestComponent>(enemyEntity,
+                                FlickerRequestComponent.FlickerRed025());
+
                             //Make bullet FX
-                            var vfxEmitterComponent = _vfxEmitterComponentLookup.GetRefRW(otherEntity);
+                            var bulletVFX = _vfxEmitterComponentLookup.GetRefRW(otherEntity);
                             VFXEmitterComponentUtility.Emit(
                                 ecb, 
-                                vfxEmitterComponent.ValueRO.Prefab, 
+                                bulletVFX.ValueRO.Prefab, 
                                 _localTransformLookup.GetRefRO(otherEntity).ValueRO.Position);
                             
                             //Remove bullet

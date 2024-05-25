@@ -1,7 +1,7 @@
 ﻿using Unity.Entities;
 using UnityEngine;
 
-namespace Unity.Physics.PhysicsStateful
+namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 {
     public class CustomPhysicsStatefulSystemAuthoring : MonoBehaviour
     {

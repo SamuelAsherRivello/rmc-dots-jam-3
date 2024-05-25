@@ -41,11 +41,15 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             _dialogVisualElement.BodyLabel.text = "Are You Sure?";
             _dialogVisualElement.IsVisible = false;
             
+            
             RestartButton.clicked += RestartButton_OnClicked;
             
             _uiDocument.rootVisualElement.RegisterCallback<KeyDownEvent>(evt =>
             {
-                if (evt.keyCode == KeyCode.Space || evt.keyCode == KeyCode.Return)
+                if (evt.keyCode == KeyCode.Space ||
+                    evt.keyCode == KeyCode.Return ||
+                    evt.keyCode == KeyCode.KeypadEnter
+                    )
                 {
                     evt.StopImmediatePropagation();
                 }
