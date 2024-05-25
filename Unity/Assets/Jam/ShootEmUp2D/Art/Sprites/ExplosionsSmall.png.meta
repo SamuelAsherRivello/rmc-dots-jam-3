@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b09a630d681b38a4da1c8871f047c060
+guid: ae8f326b35b95d64582618bd16c928eb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 300
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: explosions_0
+      name: ExplosionsSmall_0
       rect:
         serializedVersion: 2
         x: 7
@@ -138,14 +138,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a8d78afabb78ec40abf96bb714c939d
-      internalID: -1071878370
+      spriteID: 99dafc6cae3a94b4bbccfdd5f754ddc2
+      internalID: -568062073
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: explosions_1
+      name: ExplosionsSmall_1
       rect:
         serializedVersion: 2
         x: 253
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7054e203c9b52d489ccaf781d2ed398
-      internalID: -462100876
+      spriteID: b4566d53d29bc4a45bf582b3090b9f2e
+      internalID: 2004919827
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: explosions_2
+      name: ExplosionsSmall_2
       rect:
         serializedVersion: 2
         x: 5
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 301315eed064ed04698294e3a9cf63ae
-      internalID: 1758473790
+      spriteID: 95b682c48ddd69549abb5a83c0ee3f27
+      internalID: 1746377692
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: explosions_3
+      name: ExplosionsSmall_3
       rect:
         serializedVersion: 2
         x: 257
@@ -204,8 +204,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90f64caf345ff004c88332616a9440e9
-      internalID: 1497338540
+      spriteID: 41607a9d94ee63c4585e1418742f9e5b
+      internalID: 858644155
       vertices: []
       indices: 
       edges: []
@@ -222,10 +222,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      explosions_0: -1071878370
-      explosions_1: -462100876
-      explosions_2: 1758473790
-      explosions_3: 1497338540
+      ExplosionsSmall_0: -568062073
+      ExplosionsSmall_1: 2004919827
+      ExplosionsSmall_2: 1746377692
+      ExplosionsSmall_3: 858644155
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,6 +1,7 @@
 using Codice.CM.Common.Tree.Partial;
 using RMC.DOTS.Systems.Audio;
 using RMC.DOTS.Systems.PhysicsVelocityImpulse;
+using RMC.DOTS.Systems.VFX;
 using Unity.Core;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -15,6 +16,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
         public float3 WeaponUp => weaponTransform.ValueRO.Up();
         public float3 WeaponRight => weaponTransform.ValueRO.Right();
 
+        readonly RefRW<VFXEmitterComponent> vfxEmitterComponent;
         readonly RefRW<WeaponComponent> weaponComponent;
         readonly RefRO<LocalTransform> weaponTransform;
 
@@ -26,10 +28,19 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             }
 
             float3 upVelocity = WeaponUp * weaponComponent.ValueRO.BulletSpeed;
+            
+            
+            // Shoot barrel flash
+            float3 bulletPosition = WeaponPosition + WeaponUp * 1.5f;
+            VFXEmitterComponentUtility.Emit(
+                ecb, 
+                vfxEmitterComponent.ValueRO.Prefab, 
+                bulletPosition);
+            
             switch (weaponComponent.ValueRO.Type)
             {
                 case WeaponType.SINGLE_SHOT:
-                    SpawnBullet(ref ecb, WeaponPosition + WeaponUp * 1.5f, upVelocity);
+                    SpawnBullet(ref ecb, bulletPosition, upVelocity);
                     break;
 
                 case WeaponType.SHOTGUN_SPREAD:
