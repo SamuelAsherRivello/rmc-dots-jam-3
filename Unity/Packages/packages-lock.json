@@ -7,7 +7,7 @@
       "dependencies": {
         "com.rmc.rmc-readme": "1.2.2"
       },
-      "hash": "f07fab06c042d9022715bac0b920ba98eef23389"
+      "hash": "1f4478fa003bfdf8f92c96fce55ebf562f153358"
     },
     "com.rmc.rmc-readme": {
       "version": "1.2.2",
@@ -33,11 +33,11 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.cinemachine": {
-      "version": "2.10.0",
+      "version": "3.1.0",
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.test-framework": "1.1.31"
+        "com.unity.splines": "2.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -229,6 +229,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.settings-manager": {
+      "version": "2.0.1",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
     "com.unity.shadergraph": {
       "version": "17.0.3",
       "depth": 1,
@@ -237,6 +244,17 @@
         "com.unity.render-pipelines.core": "17.0.3",
         "com.unity.searcher": "4.9.2"
       }
+    },
+    "com.unity.splines": {
+      "version": "2.6.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.settings-manager": "1.0.3",
+        "com.unity.mathematics": "1.2.1",
+        "com.unity.ugui": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.sysroot": {
       "version": "2.0.10",

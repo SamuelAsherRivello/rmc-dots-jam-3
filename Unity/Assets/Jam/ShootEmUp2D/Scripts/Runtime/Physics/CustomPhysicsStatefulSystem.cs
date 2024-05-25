@@ -38,7 +38,7 @@ namespace Unity.Physics.PhysicsStateful
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
+            state.RequireForUpdate<EndSimulationEntityCommandBufferSystem.Singleton>();
             state.RequireForUpdate<CustomPhysicsStatefulSystemAuthoring.CustomPhysicsStatefulSystemIsEnabledTag>();
             state.RequireForUpdate<PhysicsStatefulSystemAuthoring.TriggerSystemIsEnabledIsEnabledTag>();
 
@@ -51,6 +51,7 @@ namespace Unity.Physics.PhysicsStateful
             _localTransformLookup = state.GetComponentLookup<LocalTransform>();
 
         }
+        
 
         //No burst due to use of string -- [BurstCompile]
         public void OnUpdate(ref SystemState state)
@@ -66,7 +67,7 @@ namespace Unity.Physics.PhysicsStateful
             //
             _tempPitchCount++;
             
-            var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>().
+            var ecb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>().
                 CreateCommandBuffer(state.WorldUnmanaged);
             
             ///////////////////////////////////////
@@ -125,8 +126,6 @@ namespace Unity.Physics.PhysicsStateful
                         
                         if (_playerBulletTagLookup.HasComponent(otherEntity))
                         {
-                            Debug.Log("1. Enemy was Hit By Bullet at FrameCount = " + Time.frameCount);
-                            
                             // Play sound
                             float[] pitches = { 0.8f, 1.0f };
                             float pitch = pitches[++_tempPitchCount % 2];

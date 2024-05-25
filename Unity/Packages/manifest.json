@@ -2,7 +2,7 @@
   "dependencies": {
     "com.rmc.rmc-dots": "https://github.com/SamuelAsherRivello/rmc-dots.git",
     "com.unity.2d.sprite": "1.0.0",
-    "com.unity.cinemachine": "2.10.0",
+    "com.unity.cinemachine": "3.1.0",
     "com.unity.collab-proxy": "2.3.1",
     "com.unity.entities.graphics": "1.2.1",
     "com.unity.ide.rider": "3.0.28",

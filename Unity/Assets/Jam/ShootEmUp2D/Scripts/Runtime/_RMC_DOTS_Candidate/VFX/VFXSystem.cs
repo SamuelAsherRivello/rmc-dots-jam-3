@@ -1,5 +1,6 @@
 ﻿using RMC.DOTS.Samples.Games.ShootEmUp2D;
 using RMC.DOTS.SystemGroups;
+using RMC.DOTS.Systems.Tween;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
@@ -33,14 +34,16 @@ namespace RMC.DOTS.Systems.VFX
 
                 var instanceEntity = ecb.Instantiate(vfxEmitRequestComponent.ValueRO.Prefab);
                 
-                Debug.Log("2. Create Explosion for VFX on FrameCount = " + Time.frameCount);
-                
                 // Move entity to initial position
                 ecb.SetComponent<LocalTransform>
                 (
                     instanceEntity,
                     LocalTransform.FromPosition(vfxEmitRequestComponent.ValueRO.Position)
                 );
+                
+                //TODO: Can I pass in an array of components like this to decouple this system?
+                ecb.AddComponent<TweenScaleComponent>(instanceEntity, 
+                    new TweenScaleComponent(0, 1, 0.5f));
                 
                 ecb.RemoveComponent<VFXEmitRequestComponent>(entity);
             }
