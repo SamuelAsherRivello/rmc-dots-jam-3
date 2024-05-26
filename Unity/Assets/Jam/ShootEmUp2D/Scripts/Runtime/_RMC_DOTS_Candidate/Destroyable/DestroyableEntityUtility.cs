@@ -21,15 +21,24 @@ namespace RMC.DOTS.Systems.Destroyable
             ComponentLookup<DestroyEntityComponent> destroyEntityComponentLookup, 
             Entity entity)
         {
+            DestroyEntity(ecb, destroyEntityComponentLookup, 0, entity);
+        }
+        
+        public static void DestroyEntity(
+            EntityCommandBuffer ecb, 
+            ComponentLookup<DestroyEntityComponent> destroyEntityComponentLookup, 
+            float timeTillDestroyInSeconds,
+            Entity entity)
+        {
             if (destroyEntityComponentLookup.HasComponent(entity))
             {
-                destroyEntityComponentLookup.GetRefRW(entity).ValueRW.TimeTillDestroyInSeconds = 0;
+                destroyEntityComponentLookup.GetRefRW(entity).ValueRW.TimeTillDestroyInSeconds = timeTillDestroyInSeconds;
             }
             else
             {
                 ecb.AddComponent<DestroyEntityComponent>(entity, new DestroyEntityComponent
                 {
-                    TimeTillDestroyInSeconds = 0
+                    TimeTillDestroyInSeconds = timeTillDestroyInSeconds
                 });
             }
         }

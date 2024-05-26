@@ -4,9 +4,11 @@ using RMC.DOTS.Systems.Destroyable;
 using RMC.DOTS.Systems.DestroyEntity;
 using RMC.DOTS.Systems.Health;
 using RMC.DOTS.Systems.Player;
+using RMC.DOTS.Systems.Tween;
 using RMC.DOTS.Systems.VFX;
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Physics;
 using Unity.Physics.PhysicsStateful;
 using Unity.Transforms;
 using UnityEngine;
@@ -137,7 +139,6 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                                 pitch
                             ));
                             
-                            
                             // Damage enemy
                             healthComponentAspect.HealthChangeBy(ecb,-35);
 
@@ -152,8 +153,11 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                                 bulletVFX.ValueRO.Prefab, 
                                 _localTransformLookup.GetRefRO(otherEntity).ValueRO.Position);
                             
-                            //Remove bullet
-                            DestroyableEntityUtility.DestroyEntityImmediately(ecb, _destroyEntityComponentLookup, otherEntity);
+                            //SLOWLY scale down and destroy bullet (disable physics)
+                            float scaleDownDuration = 0.25f;
+                            ecb.RemoveComponent<PhysicsCollider>(otherEntity);
+                            ecb.AddComponent<TweenScaleComponent>(otherEntity, new TweenScaleComponent(1, 0.1f, scaleDownDuration)); 
+                            DestroyableEntityUtility.DestroyEntity(ecb, _destroyEntityComponentLookup, scaleDownDuration, otherEntity);
 
                         }
                         
