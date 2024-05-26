@@ -67,6 +67,9 @@ TagManager:
   - name: Clouds
     uniqueID: 2839610539
     locked: 0
+  - name: Debug
+    uniqueID: 1144948951
+    locked: 0
   m_RenderingLayers:
   - Default
   - Light Layer 1
