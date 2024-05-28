@@ -14,7 +14,7 @@ namespace RMC.DOTS.Systems.Health
         
         protected override void OnCreate()
         {
-            RequireForUpdate<GameObjectHybridSystemAuthoring.GameObjectHybridSystemAuthoringIsEnabledSystem>();
+            RequireForUpdate<GameObjectHybridSystemAuthoring.GameObjectHybridSystemIsEnabled>();
             
             _gameObjectHybridMonoBehavior = UnityEngine.Object.FindObjectsOfType<GameObjectHybridMonoBehavior>().FirstOrDefault();
         }

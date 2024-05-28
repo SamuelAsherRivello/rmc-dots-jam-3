@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2649292110270201801}
   - component: {fileID: 5381061422379147754}
   - component: {fileID: 459131396057073319}
+  - component: {fileID: 8240460843935451465}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -107,6 +108,29 @@ MonoBehaviour:
     Time: 0
     Smoothing: 0
     IgnoreY: 0
+--- !u!114 &8240460843935451465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896651120667780480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ApplyAfter: 2
+  ChannelMask: 1
+  Gain: 1
+  Use2DDistance: 0
+  UseCameraSpace: 1
+  ReactionSettings:
+    m_SecondaryNoise: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    Duration: 1
+    m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &2797343972667064871
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,8 +440,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9196414465480558956}
+  - component: {fileID: 2872902953388356946}
   m_Layer: 0
-  m_Name: Cameras
+  m_Name: CinemachineController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -440,6 +465,21 @@ Transform:
   - {fileID: 2649292110270201801}
   m_Father: {fileID: 3730110963240625113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2872902953388356946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5635182560274927672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6641361ff2f8c41a33ede38ddfdc50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cinemachineBrain: {fileID: 5954707686486413763}
+  _cinemachineImpulseListener: {fileID: 8240460843935451465}
+  _cinemachineVirtualCamera: {fileID: 5381061422379147754}
 --- !u!1 &5734806532713700970
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3e063f7da4ff748991b27d8642169f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cinemachineController: {fileID: 2872902953388356946}
   _mainUI: {fileID: 8678339308754234504}
 --- !u!1 &6544160232825060683
 GameObject:

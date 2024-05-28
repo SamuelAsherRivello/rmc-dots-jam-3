@@ -8,7 +8,7 @@ namespace RMC.DOTS.Systems.Health
         [SerializeField] 
         public bool IsSystemEnabled = true;
         
-        public struct GameObjectHybridSystemAuthoringIsEnabledSystem : IComponentData {}
+        public struct GameObjectHybridSystemIsEnabled : IComponentData {}
         
         public class GameObjectHybridSystemAuthoringBaker : Baker<GameObjectHybridSystemAuthoring>
         {
@@ -17,7 +17,7 @@ namespace RMC.DOTS.Systems.Health
                 if (authoring.IsSystemEnabled)
                 {
                     Entity entity = GetEntity(TransformUsageFlags.Dynamic);
-                    AddComponent<GameObjectHybridSystemAuthoringIsEnabledSystem>(entity);
+                    AddComponent<GameObjectHybridSystemIsEnabled>(entity);
                 }
             }
         }
