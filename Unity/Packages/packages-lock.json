@@ -7,7 +7,7 @@
       "dependencies": {
         "com.rmc.rmc-readme": "1.2.2"
       },
-      "hash": "1f4478fa003bfdf8f92c96fce55ebf562f153358"
+      "hash": "9fd6d64ae5e0f0ed7052c9134763c44515fa2c62"
     },
     "com.rmc.rmc-readme": {
       "version": "1.2.2",
@@ -15,6 +15,24 @@
       "source": "registry",
       "dependencies": {},
       "url": "https://registry.npmjs.org"
+    },
+    "com.tonymax.nsprites": {
+      "version": "https://github.com/Antoshidza/NSprites.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.entities": "1.0.0-pre.65"
+      },
+      "hash": "184502dcc42c2fc6a8bd7d26b35aa62e26c6315a"
+    },
+    "com.tonymax.nsprites.foundation": {
+      "version": "https://github.com/Antoshidza/NSprites-Foundation.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.entities": "1.0.0-pre.65"
+      },
+      "hash": "01f1a54b53fdd2220eb2601d1307c3bbcb0d495f"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
@@ -290,18 +308,6 @@
       "dependencies": {
         "com.unity.test-framework": "1.1.31",
         "com.unity.modules.jsonserialize": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.timeline": {
-      "version": "1.8.6",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.director": "1.0.0",
-        "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.audio": "1.0.0",
-        "com.unity.modules.particlesystem": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },

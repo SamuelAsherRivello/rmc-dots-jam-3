@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "com.rmc.rmc-dots": "https://github.com/SamuelAsherRivello/rmc-dots.git",
+    "com.tonymax.nsprites": "https://github.com/Antoshidza/NSprites.git",
+    "com.tonymax.nsprites.foundation": "https://github.com/Antoshidza/NSprites-Foundation.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.cinemachine": "3.1.0",
     "com.unity.collab-proxy": "2.3.1",
@@ -11,7 +13,6 @@
     "com.unity.physics": "1.2.1",
     "com.unity.render-pipelines.universal": "17.0.3",
     "com.unity.test-framework": "1.4.4",
-    "com.unity.timeline": "1.8.6",
     "com.unity.toolchain.win-x86_64-linux-x86_64": "2.0.9",
     "com.unity.ugui": "2.0.0",
     "com.unity.visualeffectgraph": "17.0.3",
