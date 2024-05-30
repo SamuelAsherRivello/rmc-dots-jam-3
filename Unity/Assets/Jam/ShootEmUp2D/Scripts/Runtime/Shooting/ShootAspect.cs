@@ -104,7 +104,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
         private void SpawnBullet(ref EntityCommandBuffer ecb, float3 position, float3 velocity)
         {
 			////Muzzle Flash ---------------------------------
-            SpawnObject(ref ecb, position, velocity / 10, weaponComponent.ValueRO.MuzzleFlashPrefab);
+            SpawnObject(ref ecb, position, new float3 (0,0,0), weaponComponent.ValueRO.MuzzleFlashPrefab);
 
             ////Bullet ---------------------------------
             SpawnObject(ref ecb, position, velocity, weaponComponent.ValueRO.BulletPrefab);
