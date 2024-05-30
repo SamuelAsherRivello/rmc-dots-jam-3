@@ -14,9 +14,9 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
     {
         public readonly Entity BulletPrefab;
         public readonly Entity MuzzleFlashPrefab;
-		public readonly float BulletSpeed;
+		public float BulletSpeed;
 		public readonly bool ShootDirectionIsUp;
-		public readonly float BulletFireRate;
+		public float BulletFireRate;
         public readonly WeaponType Type;
 
         public double _NextCooldownTime;
