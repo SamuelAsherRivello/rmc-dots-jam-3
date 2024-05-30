@@ -42,6 +42,25 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             weaponComponent.ValueRW.BulletSpeed = math.clamp(weaponComponent.ValueRW.BulletSpeed, 1.0f, 100.0f);
         }
 
+        public void SwitchToWeaponInSlot(int slotNumber)
+        {
+            WeaponType newWeaponType = WeaponType.SINGLE_SHOT;
+            switch (slotNumber)
+            {
+                case 0: newWeaponType = WeaponType.SINGLE_SHOT; break;
+                case 1: newWeaponType = WeaponType.SHOTGUN_SPREAD; break;
+                case 2: newWeaponType = WeaponType.TRIPLE_SHOT; break;
+            }
+
+            SwitchToWeapon(newWeaponType);
+        }
+
+
+        private void SwitchToWeapon(WeaponType weaponType)
+        {
+            weaponComponent.ValueRW.Type = weaponType;
+        }
+
         public bool TryShoot(ref EntityCommandBuffer ecb, TimeData time)
         {
             if (time.ElapsedTime < weaponComponent.ValueRO._NextCooldownTime)

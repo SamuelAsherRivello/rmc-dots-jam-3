@@ -17,7 +17,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 		public float BulletSpeed;
 		public readonly bool ShootDirectionIsUp;
 		public float BulletFireRate;
-        public readonly WeaponType Type;
+        public WeaponType Type;
 
         public double _NextCooldownTime;
 

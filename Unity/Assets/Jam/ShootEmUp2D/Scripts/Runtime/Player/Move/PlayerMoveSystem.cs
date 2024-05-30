@@ -6,6 +6,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Physics.Extensions;
+using UnityEngine;
 
 namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 {
@@ -41,14 +42,21 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             }
 
             
-            foreach (var (physicsVelocity, physicsMass, playerMoveComponent) in 
-                     SystemAPI.Query<RefRW<PhysicsVelocity>,RefRW<PhysicsMass>, RefRO<PlayerMoveComponent>>().
+            foreach (var (physicsVelocity, physicsMass, playerMoveComponent, shootAspect) in 
+                     SystemAPI.Query<RefRW<PhysicsVelocity>,RefRW<PhysicsMass>, RefRO<PlayerMoveComponent>, ShootAspect>().
                          WithAll<PlayerTag>())
             {
                 float3 moveComposite3D = new float3(moveComposite.x, moveComposite.y, 0) *
                                          (deltaTime * playerMoveComponent.ValueRO.LinearSpeed);
                 
                 physicsVelocity.ValueRW.ApplyLinearImpulse(in physicsMass.ValueRW, moveComposite3D);
+
+                if (Input.GetKeyDown(KeyCode.Alpha1))
+                    shootAspect.SwitchToWeaponInSlot(0);
+                else if (Input.GetKeyDown(KeyCode.Alpha2))
+                    shootAspect.SwitchToWeaponInSlot(1);
+                else if (Input.GetKeyDown(KeyCode.Alpha3))
+                    shootAspect.SwitchToWeaponInSlot(2);
             }
         }
     }
