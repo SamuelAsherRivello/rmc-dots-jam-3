@@ -13,10 +13,23 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
     readonly partial struct ShootAspect : IAspect
     {
         public float3 WeaponPosition => weaponTransform.ValueRO.Position;
-        public float3 WeaponUp => weaponTransform.ValueRO.Up();
-        public float3 WeaponRight => weaponTransform.ValueRO.Right();
-
-        readonly RefRW<VFXEmitterComponent> vfxEmitterComponent;
+        public float3 WeaponUp 
+        {
+            get
+            {
+                if (weaponComponent.ValueRO.ShootDirectionIsUp)
+                {
+					return weaponTransform.ValueRO.Up();
+				}
+                else
+                {
+					return -weaponTransform.ValueRO.Up();
+				}
+			}
+        }
+  
+        public float3 GlobalRight => weaponTransform.ValueRO.Right();
+		readonly RefRW<VFXEmitterComponent> vfxEmitterComponent;
         readonly RefRW<WeaponComponent> weaponComponent;
         readonly RefRO<LocalTransform> weaponTransform;
 
@@ -46,19 +59,36 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                 case WeaponType.SHOTGUN_SPREAD:
                     int numberOfShotgunBullets = 5;
                     float angleStep = 180.0f / (float) (numberOfShotgunBullets - 1);
-                    float3 baseLeftPoint = -WeaponRight * 1.0f;
+
+                    float s = 1;
+                    if (weaponComponent.ValueRO.ShootDirectionIsUp)
+                    {
+                        s = -1;
+                    }
+                    float3 baseLeftPoint = s * GlobalRight * 1.0f;
                     for (int i = 0; i < numberOfShotgunBullets; i++)
                     {
+                        //Rotation
                         quaternion spreadRotation = quaternion.RotateZ((float) i * -angleStep * math.TORADIANS);
-                        float3 newPoint = math.mul(spreadRotation, baseLeftPoint);
-                        SpawnBullet(ref ecb, WeaponPosition + newPoint, newPoint * weaponComponent.ValueRO.BulletSpeed);
+
+                        //Position
+                        float3 newPoint = bulletPosition + math.mul(spreadRotation, baseLeftPoint);
+
+                        //Direction
+						float3 newDirection = math.mul(spreadRotation, baseLeftPoint);
+                        newDirection *= weaponComponent.ValueRO.BulletSpeed;
+                        newDirection *= s;
+
+						//Spawn
+						SpawnBullet(ref ecb, newPoint, newDirection);
+                        
                     }
                     break;
 
                 case WeaponType.TRIPLE_SHOT:
-                    SpawnBullet(ref ecb, WeaponPosition + WeaponUp * 0.5f - WeaponRight * 1.0f, upVelocity);
+                    SpawnBullet(ref ecb, WeaponPosition + WeaponUp * 0.5f - GlobalRight * 1.0f, upVelocity);
                     SpawnBullet(ref ecb, WeaponPosition + WeaponUp * 1.5f, upVelocity);
-                    SpawnBullet(ref ecb, WeaponPosition + WeaponUp * 0.5f + WeaponRight * 1.0f, upVelocity);
+                    SpawnBullet(ref ecb, WeaponPosition + WeaponUp * 0.5f + GlobalRight * 1.0f, upVelocity);
                     break;
             }
 

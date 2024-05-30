@@ -14,15 +14,18 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
     {
         public readonly Entity BulletPrefab;
         public readonly float BulletSpeed;
-        public readonly float BulletFireRate;
+		public readonly bool ShootDirectionIsUp;
+		public readonly float BulletFireRate;
         public readonly WeaponType Type;
 
         public double _NextCooldownTime;
 
-        public WeaponComponent(Entity bulletPrefab, float bulletSpeed, float bulletFireRate, WeaponType newType)
+
+        public WeaponComponent(Entity bulletPrefab, bool shootDirectionIsUp, float bulletSpeed, float bulletFireRate, WeaponType newType)
         {
             BulletPrefab = bulletPrefab;
-            BulletSpeed = bulletSpeed;
+            ShootDirectionIsUp = shootDirectionIsUp;
+			BulletSpeed = bulletSpeed;
             BulletFireRate = bulletFireRate;
             Type = newType;
             _NextCooldownTime = 0.0f;

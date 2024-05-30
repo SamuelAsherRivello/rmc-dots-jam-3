@@ -6,7 +6,11 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D.StateMachines.EnemyStateMachine
 {
     partial class EnemyAIStateMachine : StateMachineSystem<EnemyAIComponent>
     {
-	    //TODO: Move this to library on base class
+
+		//TODO 1: Rename "Commands" in State class to "EntityCommandBuffer"
+
+
+		//TODO 2: Move this new method to the dots source, and on base class
 		public void RequestStateChangeForAllEntities<T>() where T : State
 		{
 			var query = GetStateEntityQuery();

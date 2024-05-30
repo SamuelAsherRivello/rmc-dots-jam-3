@@ -26,7 +26,6 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D.StateMachines.EnemyStateMachine
 				{
                     MoveOffset = authoring.MoveOffset,
 					MoveSpeed = authoring.MoveSpeed,
-
 					WaitDurationInSeconds = authoring.WaitDurationInSeconds,
 
 				});

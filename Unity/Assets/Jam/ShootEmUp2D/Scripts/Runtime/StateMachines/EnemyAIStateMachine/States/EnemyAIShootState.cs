@@ -1,3 +1,4 @@
+using RMC.DOTS.Systems.Player;
 using Unity.Entities;
 using UnityEngine;
 
@@ -10,7 +11,11 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D.StateMachines.EnemyStateMachine
         {
             base.OnUpdate(entity);
 
-            //Debug.Log("Shoot");
+			// Get Component
+			ShootAspect shootAspect = EntityManager.GetAspect<ShootAspect>(entity);
+            shootAspect.TryShoot(ref Commands, World.Time);
+
+			//Debug.Log("Shoot");
 			RequestStateChangePerTransitions(entity);
 		}
     }
