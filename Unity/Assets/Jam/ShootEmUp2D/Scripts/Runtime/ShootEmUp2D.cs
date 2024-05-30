@@ -2,9 +2,11 @@ using System;
 using System.Threading.Tasks;
 using RMC.Audio;
 using RMC.Core.Utilities;
+using RMC.DOTS.Samples.Games.ShootEmUp2D.StateMachines.EnemyStateMachine;
 using RMC.DOTS.Systems.GameState;
 using RMC.DOTS.Systems.Scoring;
 using RMC.DOTS.Utilities;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Scenes;
 using UnityEngine;
@@ -112,14 +114,25 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
         {
             await DOTSUtility.IsWorldReadyAsync(_subScene);
 
-            if (_gameStateSystem != null)
+
+            SetupStateMachines();
+
+
+			if (_gameStateSystem != null)
             {
                 _gameStateSystem.GameState = GameState.Initializing;
             }
         }
 
-        
-        private void RefreshWaveProgressLabel()
+		private void SetupStateMachines()
+		{
+			//Set initial state for all enemies
+			EnemyAIStateMachine enemyStateMachine = _ecsWorld.CreateSystemManaged<EnemyAIStateMachine>();
+            enemyStateMachine.RequestStateChangeForAllEntities<EnemyAIMoveState>();
+	
+		}
+
+		private void RefreshWaveProgressLabel()
         {
             _common.MainUI.WaveProgressLabel.text = $"Enemies {_enemyKillsThisRoundCurrent} / {_enemyKillsThisRoundMax}";
         }

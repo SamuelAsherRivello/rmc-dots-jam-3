@@ -159,8 +159,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                             ecb.AddComponent<TweenScaleComponent>(otherEntity, new TweenScaleComponent(1, 0.1f, scaleDownDuration)); 
                             DestroyableEntityUtility.DestroyEntity(ecb, _destroyEntityComponentLookup, scaleDownDuration, otherEntity);
 
-                        }
-                        
+						}
                     }
                 }
             }
