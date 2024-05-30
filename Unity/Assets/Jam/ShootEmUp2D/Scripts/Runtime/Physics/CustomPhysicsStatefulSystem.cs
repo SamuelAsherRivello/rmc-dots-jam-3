@@ -118,14 +118,25 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 								bulletVFX.ValueRO.Prefab,
 								_localTransformLookup.GetRefRO(otherEntity).ValueRO.Position);
 
-							// Cale Down Bullet
+							// Scale Down Bullet
 							float scaleDownDuration = 0.25f;
 							ecb.RemoveComponent<PhysicsCollider>(otherEntity);
 							ecb.AddComponent<TweenScaleComponent>(otherEntity, new TweenScaleComponent(1, 0.1f, scaleDownDuration));
 							DestroyableEntityUtility.DestroyEntity(ecb, _destroyEntityComponentLookup, scaleDownDuration, otherEntity);
 
-                           
-                        }
+							// Play sound
+							float[] pitches = { 0.8f, 1.0f };
+							float pitch = pitches[++_tempPitchCount % 2];
+							var audioEntity = ecb.CreateEntity();
+							ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
+							(
+								"GunHit02",
+								AudioConstants.VolumeDefault,
+								pitch
+							));
+
+
+						}
                         
                         // Great info via debug tooling
                         //PhysicsStatefulDebugSystem.LogEvent(ref state, entity, bufferIndex, statefulTriggerEvent);
@@ -177,7 +188,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                                 bulletVFX.ValueRO.Prefab, 
                                 _localTransformLookup.GetRefRO(otherEntity).ValueRO.Position);
                             
-                            // Cale Down Bullet
+                            // Scale Down Bullet
                             float scaleDownDuration = 0.25f;
                             ecb.RemoveComponent<PhysicsCollider>(otherEntity);
                             ecb.AddComponent<TweenScaleComponent>(otherEntity, new TweenScaleComponent(1, 0.1f, scaleDownDuration)); 
