@@ -13,23 +13,23 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
     readonly partial struct ShootAspect : IAspect
     {
         public float3 WeaponPosition => weaponTransform.ValueRO.Position;
-        public float3 WeaponUp 
+        public float3 WeaponUp
         {
             get
             {
                 if (weaponComponent.ValueRO.ShootDirectionIsUp)
                 {
-					return weaponTransform.ValueRO.Up();
-				}
+                    return weaponTransform.ValueRO.Up();
+                }
                 else
                 {
-					return -weaponTransform.ValueRO.Up();
-				}
-			}
+                    return -weaponTransform.ValueRO.Up();
+                }
+            }
         }
-  
+
         public float3 GlobalRight => weaponTransform.ValueRO.Right();
-		readonly RefRW<VFXEmitterComponent> vfxEmitterComponent;
+        readonly RefRW<VFXEmitterComponent> vfxEmitterComponent;
         readonly RefRW<WeaponComponent> weaponComponent;
         readonly RefRO<LocalTransform> weaponTransform;
 
@@ -41,15 +41,11 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             }
 
             float3 upVelocity = WeaponUp * weaponComponent.ValueRO.BulletSpeed;
-            
-            
+
+
             // Shoot barrel flash
             float3 bulletPosition = WeaponPosition + WeaponUp * 1.5f;
-            VFXEmitterComponentUtility.Emit(
-                ecb, 
-                vfxEmitterComponent.ValueRO.Prefab, 
-                bulletPosition);
-            
+
             switch (weaponComponent.ValueRO.Type)
             {
                 case WeaponType.SINGLE_SHOT:
@@ -58,30 +54,29 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 
                 case WeaponType.SHOTGUN_SPREAD:
                     int numberOfShotgunBullets = 5;
-                    float angleStep = 180.0f / (float) (numberOfShotgunBullets - 1);
+                    float angleStep = 180.0f / (float)(numberOfShotgunBullets - 1);
 
                     float s = 1;
                     if (weaponComponent.ValueRO.ShootDirectionIsUp)
                     {
                         s = -1;
                     }
-                    float3 baseLeftPoint = s * GlobalRight * 1.0f;
+                    float3 baseLeftPoint = GlobalRight * 1.0f;
                     for (int i = 0; i < numberOfShotgunBullets; i++)
                     {
                         //Rotation
-                        quaternion spreadRotation = quaternion.RotateZ((float) i * -angleStep * math.TORADIANS);
+                        quaternion spreadRotation = quaternion.RotateZ((float)i * -angleStep * math.TORADIANS * s);
 
                         //Position
                         float3 newPoint = bulletPosition + math.mul(spreadRotation, baseLeftPoint);
 
                         //Direction
-						float3 newDirection = math.mul(spreadRotation, baseLeftPoint);
+                        float3 newDirection = math.mul(spreadRotation, baseLeftPoint);
                         newDirection *= weaponComponent.ValueRO.BulletSpeed;
-                        newDirection *= s;
 
-						//Spawn
-						SpawnBullet(ref ecb, newPoint, newDirection);
-                        
+                        //Spawn
+                        SpawnBullet(ref ecb, newPoint, newDirection);
+
                     }
                     break;
 
@@ -99,18 +94,30 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 
         private void SpawnBullet(ref EntityCommandBuffer ecb, float3 position, float3 velocity)
         {
+            //Muzzle Flash ---------------------------------
+            var muzzleFlashEntity = ecb.Instantiate(weaponComponent.ValueRO.MuzzleFlashPrefab);
+            SpawnObject(ref ecb, position, velocity / 10, muzzleFlashEntity);
+
+            //Bullet ---------------------------------
             var newBulletEntity = ecb.Instantiate(weaponComponent.ValueRO.BulletPrefab);
+            SpawnObject(ref ecb, position, velocity, newBulletEntity);
+        }
+
+
+        private void SpawnObject(ref EntityCommandBuffer ecb, float3 position, float3 velocity, Entity entityPrefab)
+        {
+            //Muzzle Flash ---------------------------------
+            var entity = ecb.Instantiate(entityPrefab);
 
             ecb.SetComponent<LocalTransform>
             (
-                newBulletEntity,
+                entity,
                 LocalTransform.FromPosition(position)
             );
 
-            var bulletForce = velocity; // For now, we're not using it as a velocity, instead it is going to be a force
             ecb.AddComponent<PhysicsVelocityImpulseComponent>
             (
-                newBulletEntity,
+                entity,
                 PhysicsVelocityImpulseComponent.FromForce(velocity)
             );
         }

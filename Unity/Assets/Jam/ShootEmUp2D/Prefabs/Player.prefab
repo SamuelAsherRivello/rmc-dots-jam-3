@@ -359,6 +359,7 @@ MonoBehaviour:
     type: 3}
   BulletSpeed: 10
   BulletFireRate: 0.5
+  ShootDirectionIsUp: 1
   Type: 0
 --- !u!114 &6191911746492997330
 MonoBehaviour:

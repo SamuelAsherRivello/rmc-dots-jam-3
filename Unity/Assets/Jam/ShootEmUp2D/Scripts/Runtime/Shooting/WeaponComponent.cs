@@ -13,7 +13,8 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
     public partial struct WeaponComponent : IComponentData
     {
         public readonly Entity BulletPrefab;
-        public readonly float BulletSpeed;
+        public readonly Entity MuzzleFlashPrefab;
+		public readonly float BulletSpeed;
 		public readonly bool ShootDirectionIsUp;
 		public readonly float BulletFireRate;
         public readonly WeaponType Type;
@@ -21,10 +22,17 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
         public double _NextCooldownTime;
 
 
-        public WeaponComponent(Entity bulletPrefab, bool shootDirectionIsUp, float bulletSpeed, float bulletFireRate, WeaponType newType)
+        public WeaponComponent(
+            Entity bulletPrefab, 
+            Entity muzzleFlashPrefab,
+		    bool shootDirectionIsUp, 
+            float bulletSpeed, 
+            float bulletFireRate, 
+            WeaponType newType)
         {
             BulletPrefab = bulletPrefab;
-            ShootDirectionIsUp = shootDirectionIsUp;
+			MuzzleFlashPrefab = muzzleFlashPrefab;
+			ShootDirectionIsUp = shootDirectionIsUp;
 			BulletSpeed = bulletSpeed;
             BulletFireRate = bulletFireRate;
             Type = newType;
