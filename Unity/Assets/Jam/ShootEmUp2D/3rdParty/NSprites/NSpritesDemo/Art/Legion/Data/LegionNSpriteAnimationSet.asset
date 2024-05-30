@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: LegionNSpriteAnimationSet
   m_EditorClassIdentifier: 
   _animations:
-  - name: Legion
+  - name: Legion1
+    data: {fileID: 11400000, guid: 9117fa41c4589d241a60b82c08c5f539, type: 2}
+  - name: Legion2
     data: {fileID: 11400000, guid: 9117fa41c4589d241a60b82c08c5f539, type: 2}

@@ -792,7 +792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AnimationAuthoringModule:
     AnimationSet: {fileID: 11400000, guid: 6a6dbcadd70d14843bc964d65274baa4, type: 2}
-    InitialAnimationIndex: 0
+    InitialAnimationIndex: 1
   RegisterSpriteData:
     SpriteRenderData:
       Material: {fileID: 2100000, guid: d84d30a8fe326be4f98378dcb774dabf, type: 2}

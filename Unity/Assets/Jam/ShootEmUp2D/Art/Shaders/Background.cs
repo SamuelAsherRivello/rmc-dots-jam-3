@@ -59,7 +59,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
         //  Unity Methods ---------------------------------
         protected void Start()
         {
-            Debug.Log($"{gameObject.name}.{GetType().Name}.Start()");
+            //Debug.Log($"{gameObject.name}.{GetType().Name}.Start()");
 
             SetScrollSpeedViaInspector();
         }
