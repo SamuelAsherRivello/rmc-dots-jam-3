@@ -1,9 +1,7 @@
 ﻿using System.Linq;
-using RMC.DOTS.Samples.Games.ShootEmUp2D;
 using RMC.DOTS.SystemGroups;
 using RMC.DOTS.Systems.Cinemachines;
 using Unity.Entities;
-using Unity.Transforms;
 using UnityEngine;
 
 namespace RMC.DOTS.Systems.Health
@@ -20,7 +18,7 @@ namespace RMC.DOTS.Systems.Health
             EntityManager.AddComponentData<CinemachineControllerReferenceComponent>(entity,
                 new CinemachineControllerReferenceComponent
                 {
-                    CinemachineController = Object.FindObjectsOfType<CinemachineController>().FirstOrDefault()
+                    CinemachineController = Object.FindObjectsByType<CinemachineController>(FindObjectsSortMode.None).FirstOrDefault()
                 });
         }
 

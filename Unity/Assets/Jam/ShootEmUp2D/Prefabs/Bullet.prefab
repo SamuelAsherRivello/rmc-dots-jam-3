@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: -6864467509782143561}
   - component: {fileID: 1950724607271522575}
   - component: {fileID: 4554353271904703996}
-  - component: {fileID: -521184423817781190}
   - component: {fileID: -1881455221806151062}
   - component: {fileID: -8889610997515631105}
   m_Layer: 0
@@ -301,18 +300,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _physicsBodyAuthoring: {fileID: -6864467509782143561}
   _physicsShapeAuthoring: {fileID: 1950724607271522575}
---- !u!114 &-521184423817781190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5354429359170866509}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0fd51a16ea0c0149a1ad22e6788d9fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1881455221806151062
 MonoBehaviour:
   m_ObjectHideFlags: 0

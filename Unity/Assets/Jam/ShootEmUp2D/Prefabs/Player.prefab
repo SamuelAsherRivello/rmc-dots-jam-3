@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -241145750107073247}
   - component: {fileID: 6191911746492997330}
   - component: {fileID: 6175048376264708696}
+  - component: {fileID: 5371847770199021570}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -160,29 +161,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShapeType: 0
+  m_ShapeType: 4
   m_PrimitiveCenter:
     x: 0
     y: 0
     z: 0
   m_PrimitiveSize:
-    x: 1.7776237
-    y: 1.61818
-    z: 1
+    x: 1.61818
+    y: 0
+    z: 1.7776237
   m_PrimitiveOrientation:
     Value:
-      x: 0
-      y: 0
-      z: 0
+      x: -0
+      y: 90
+      z: 90
     RotationOrder: 4
   m_Capsule:
     Height: 1.7776237
     Radius: 0.80909
-    Axis: 0
-  m_Cylinder:
-    Height: 1
-    Radius: 0.8888118
     Axis: 2
+  m_Cylinder:
+    Height: 0
+    Radius: 0.8888118
+    Axis: 1
   m_CylinderSideCount: 20
   m_SphereRadius: 0.8888118
   m_MinimumSkinnedVertexWeight: 0.1
@@ -197,7 +198,7 @@ MonoBehaviour:
     m_Template: {fileID: 0}
     m_CollisionResponse:
       m_Override: 0
-      m_Value: 0
+      m_Value: 3
     m_Friction:
       m_Override: 0
       m_Value:
@@ -355,10 +356,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930eb5fbe3fa7314e80155728d400cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 5354429359170866509, guid: 2080f5a49872db749aef8f424020d0f9,
+  BulletPrefab: {fileID: 9002459100749562791, guid: da6c34b1b4ba3bc46b717e2854a74832,
     type: 3}
   BulletSpeed: 10
   BulletFireRate: 0.5
+  MuzzleFlashPrefab: {fileID: 7425059789186097586, guid: ee6a3661f69a1b2499de6ba53ac6e60a,
+    type: 3}
   ShootDirectionIsUp: 1
   Type: 0
 --- !u!114 &6191911746492997330
@@ -386,6 +389,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647a965bff844ca188b9f666774cbe32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5371847770199021570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701181624954122511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71242163ba188c04b8b904b94ff79242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _physicsBodyAuthoring: {fileID: 3409344557983688220}
+  _physicsShapeAuthoring: {fileID: 3721317070430586114}
 --- !u!1 &7310697937680723989
 GameObject:
   m_ObjectHideFlags: 0

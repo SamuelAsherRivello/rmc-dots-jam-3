@@ -129,7 +129,6 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 			//Set initial state for all enemies
 			EnemyAIStateMachine enemyStateMachine = _ecsWorld.CreateSystemManaged<EnemyAIStateMachine>();
             enemyStateMachine.RequestStateChangeForAllEntities<EnemyAIMoveState>();
-	
 		}
 
 		private void RefreshWaveProgressLabel()

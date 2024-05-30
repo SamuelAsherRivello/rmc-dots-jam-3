@@ -2572,28 +2572,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1022204936}
     m_Modifications:
-    - target: {fileID: -241145750107073247, guid: a1bd441edf8f09c4da06808f49601c86,
-        type: 3}
-      propertyPath: Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -241145750107073247, guid: a1bd441edf8f09c4da06808f49601c86,
-        type: 3}
-      propertyPath: BulletPrefab
-      value: 
-      objectReference: {fileID: 9002459100749562791, guid: da6c34b1b4ba3bc46b717e2854a74832,
-        type: 3}
-    - target: {fileID: -241145750107073247, guid: a1bd441edf8f09c4da06808f49601c86,
-        type: 3}
-      propertyPath: MuzzleFlashPrefab
-      value: 
-      objectReference: {fileID: 7425059789186097586, guid: ee6a3661f69a1b2499de6ba53ac6e60a,
-        type: 3}
-    - target: {fileID: -241145750107073247, guid: a1bd441edf8f09c4da06808f49601c86,
-        type: 3}
-      propertyPath: ShootDirectionIsUp
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 645407843221631725, guid: a1bd441edf8f09c4da06808f49601c86,
         type: 3}
       propertyPath: m_LocalPosition.x
