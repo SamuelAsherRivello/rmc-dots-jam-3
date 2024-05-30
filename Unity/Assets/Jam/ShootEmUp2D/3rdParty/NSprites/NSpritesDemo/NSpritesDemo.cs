@@ -9,12 +9,10 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
     {
 
         //  Unity Methods  --------------------------------
-        protected async void Start()
+        protected void Start()
         {
 			// ECS
 			World world = World.DefaultGameObjectInjectionWorld;
-
-
 		}
 
     }

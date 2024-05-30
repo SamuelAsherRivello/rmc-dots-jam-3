@@ -33,5 +33,6 @@ namespace RMC.DOTS.Systems.VFX
                 _ElapsedTimeInSeconds = 0
             };
         }
-    }
+
+	}
 }

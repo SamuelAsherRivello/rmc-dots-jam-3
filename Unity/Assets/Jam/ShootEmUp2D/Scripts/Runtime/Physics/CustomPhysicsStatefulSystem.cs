@@ -73,8 +73,8 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             
             ///////////////////////////////////////
             // 1. Player Detecting Other Things...
-            foreach (var (dynamicBuffer, playerEntity) in 
-                     SystemAPI.Query<DynamicBuffer<StatefulTriggerEvent>>().
+            foreach (var (dynamicBuffer, healthComponentAspect, playerEntity) in 
+                     SystemAPI.Query<DynamicBuffer<StatefulTriggerEvent>, HealthComponentAspect> ().
                          WithAll<PlayerTag>().
                          WithEntityAccess())
             {
@@ -100,9 +100,30 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                         // Player hit EnemyBullet
                         if (_enemyBulletTagLookup.HasComponent(otherEntity))
                         {
-            
-                            //Remove bullet
-                            DestroyableEntityUtility.DestroyEntityImmediately(ecb, _destroyEntityComponentLookup, otherEntity);
+
+							///////////////////////////////////
+							// ENEMY
+							///////////////////////////////////
+							// Take Damage
+							healthComponentAspect.HealthChangeBy(ecb, -3.5f); //about 30 bullets = death
+
+							// Flicker Enemy Color
+							//ecb.AddComponent<FlickerRequestComponent>(playerEntity,       //SamR will add this soon
+							//	FlickerRequestComponent.FlickerBlue025());
+
+							// Make Bullet Decal
+							var bulletVFX = _vfxEmitterComponentLookup.GetRefRW(otherEntity);
+							VFXEmitterComponentUtility.Emit(
+								ecb,
+								bulletVFX.ValueRO.Prefab,
+								_localTransformLookup.GetRefRO(otherEntity).ValueRO.Position);
+
+							// Cale Down Bullet
+							float scaleDownDuration = 0.25f;
+							ecb.RemoveComponent<PhysicsCollider>(otherEntity);
+							ecb.AddComponent<TweenScaleComponent>(otherEntity, new TweenScaleComponent(1, 0.1f, scaleDownDuration));
+							DestroyableEntityUtility.DestroyEntity(ecb, _destroyEntityComponentLookup, scaleDownDuration, otherEntity);
+
                            
                         }
                         
@@ -143,7 +164,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                             // ENEMY
                             ///////////////////////////////////
                             // Take Damage
-                            healthComponentAspect.HealthChangeBy(ecb,-35);
+                            healthComponentAspect.HealthChangeBy(ecb,-35); //about 3 bullets = death
 
                             // Flicker Enemy Color
                             ecb.AddComponent<FlickerRequestComponent>(enemyEntity,

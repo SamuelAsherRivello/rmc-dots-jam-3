@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 6191911746492997330}
   - component: {fileID: 6175048376264708696}
   - component: {fileID: 5371847770199021570}
+  - component: {fileID: 2080715436483759216}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -403,6 +404,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _physicsBodyAuthoring: {fileID: 3409344557983688220}
   _physicsShapeAuthoring: {fileID: 3721317070430586114}
+--- !u!114 &2080715436483759216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701181624954122511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ce42e236f924b64fa1b583a91358ab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthMax: 100
+  HealthMin: 0
+  HealthCurrent: 100
 --- !u!1 &7310697937680723989
 GameObject:
   m_ObjectHideFlags: 0

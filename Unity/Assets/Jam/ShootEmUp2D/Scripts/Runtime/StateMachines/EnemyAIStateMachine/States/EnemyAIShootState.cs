@@ -1,11 +1,12 @@
+using RMC.DOTS.SystemGroups;
 using RMC.DOTS.Systems.Player;
 using Unity.Entities;
 using UnityEngine;
 
 namespace RMC.DOTS.Samples.Games.ShootEmUp2D.StateMachines.EnemyStateMachine
 {
-    
-    public class EnemyAIShootState : EnemyAIBaseState
+	[UpdateInGroup(typeof(UnpauseablePresentationSystemGroup))]
+	public class EnemyAIShootState : EnemyAIBaseState
     {
         public override void OnUpdate(Entity entity)
         {
