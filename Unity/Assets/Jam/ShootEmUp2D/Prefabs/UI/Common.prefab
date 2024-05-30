@@ -479,7 +479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cinemachineBrain: {fileID: 5954707686486413763}
   _cinemachineImpulseListener: {fileID: 8240460843935451465}
-  _cinemachineVirtualCamera: {fileID: 5381061422379147754}
+  _cinemachineCamera: {fileID: 5381061422379147754}
 --- !u!1 &5734806532713700970
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,8 +529,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3e063f7da4ff748991b27d8642169f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cinemachineController: {fileID: 2872902953388356946}
   _mainUI: {fileID: 8678339308754234504}
+  _cinemachineController: {fileID: 2872902953388356946}
+  _cinemachineTarget: {fileID: 0}
 --- !u!1 &6544160232825060683
 GameObject:
   m_ObjectHideFlags: 0

@@ -221,8 +221,8 @@ MonoBehaviour:
   RotationDurationInSeconds: 1
   TranslationDelta: {x: 0, y: 0.5, z: 0}
   TranslationDurationInSeconds: 1
-  ScaleDelta: 0.1
-  ScaleDurationInSeconds: 1.1
+  ScaleDelta: 1.1
+  ScaleDurationInSeconds: 1
 --- !u!1 &954058987
 GameObject:
   m_ObjectHideFlags: 0

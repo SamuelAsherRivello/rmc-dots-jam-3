@@ -1,5 +1,6 @@
 using RMC.DOTS.Samples.Games.ShootEmUp2D;
 using RMC.DOTS.Systems.Cinemachines;
+using Unity.Cinemachine;
 using UnityEngine;
 
 namespace RMC.DOTS.Samples.Games.ShootEmUp2D
@@ -27,14 +28,21 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 
         [SerializeField]
         private CinemachineController _cinemachineController;
-        
-  
-        //  Unity Methods  -------------------------------
-        
-        
-        //  Methods ---------------------------------------
-        
-        
-        //  Event Handlers --------------------------------
-    }
+
+        [SerializeField]
+        private Transform _cinemachineTarget;
+
+
+		//  Unity Methods  -------------------------------
+		protected void Start()
+		{
+			_cinemachineController.CinemachineCamera.Follow = _cinemachineTarget;
+		}
+
+
+		//  Methods ---------------------------------------
+
+
+		//  Event Handlers --------------------------------
+	}
 }
