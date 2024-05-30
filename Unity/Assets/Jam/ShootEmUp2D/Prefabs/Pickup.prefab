@@ -108,7 +108,7 @@ MonoBehaviour:
   m_MotionType: 0
   m_Smoothing: 0
   m_Mass: 1
-  m_LinearDamping: 0.01
+  m_LinearDamping: 1
   m_AngularDamping: 0.05
   m_InitialLinearVelocity:
     x: 0
@@ -330,7 +330,7 @@ MonoBehaviour:
     m_Bits: 64
   AngularSpeed: 0
   LinearSpeed: 5
-  Radius: 4
+  Radius: 100
   IsEnabled: 1
 --- !u!114 &-5525696722251327020
 MonoBehaviour:
