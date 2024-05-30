@@ -2,14 +2,12 @@
 
 namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 {
-    public struct PickupDropComponent : IComponentData
+    public struct PickupComponent : IComponentData
     {
-        public readonly Entity Prefab;   
         public readonly float LinearSpeed;      
 
-        public PickupDropComponent(Entity prefab, float linearSpeed)
+        public PickupComponent(float linearSpeed)
         {
-            Prefab = prefab;
             LinearSpeed = linearSpeed;
         }
     }

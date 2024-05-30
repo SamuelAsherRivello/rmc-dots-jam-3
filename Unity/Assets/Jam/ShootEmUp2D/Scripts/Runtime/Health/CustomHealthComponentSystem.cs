@@ -5,6 +5,7 @@ using RMC.DOTS.Systems.VFX;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 {
@@ -37,6 +38,8 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             var ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
                 .CreateCommandBuffer(state.WorldUnmanaged);
 
+            var pickupSpawner = SystemAPI.GetSingleton<PickupSpawnerComponent>();
+
             foreach (var (healthComponentAspect, entity) in
                      SystemAPI.Query<HealthComponentAspect>().
                          WithEntityAccess())
@@ -50,7 +53,9 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                     {
                         // Remove Enemy
                         ecb.AddComponent<DestroyEntityComponent>(entity);
-                                
+                        
+                        pickupSpawner.Spawn(ecb, _localTransformComponentLookup[entity].Position);
+                                                        
                         //Make Enemy FX
                         var enemyVFX = _vfxEmitterComponentLookup.GetRefRW(entity);
                         VFXEmitterComponentUtility.Emit(
