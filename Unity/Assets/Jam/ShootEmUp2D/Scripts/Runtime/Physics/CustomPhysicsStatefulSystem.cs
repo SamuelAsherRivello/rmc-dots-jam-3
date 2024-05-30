@@ -139,21 +139,24 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                                 pitch
                             ));
                             
-                            // Damage enemy
+                            ///////////////////////////////////
+                            // ENEMY
+                            ///////////////////////////////////
+                            // Take Damage
                             healthComponentAspect.HealthChangeBy(ecb,-35);
 
                             // Flicker Enemy Color
                             ecb.AddComponent<FlickerRequestComponent>(enemyEntity,
                                 FlickerRequestComponent.FlickerRed025());
 
-                            //Make bullet FX
+                            // Make Bullet Decal
                             var bulletVFX = _vfxEmitterComponentLookup.GetRefRW(otherEntity);
                             VFXEmitterComponentUtility.Emit(
                                 ecb, 
                                 bulletVFX.ValueRO.Prefab, 
                                 _localTransformLookup.GetRefRO(otherEntity).ValueRO.Position);
                             
-                            //SLOWLY scale down and destroy bullet (disable physics)
+                            // Cale Down Bullet
                             float scaleDownDuration = 0.25f;
                             ecb.RemoveComponent<PhysicsCollider>(otherEntity);
                             ecb.AddComponent<TweenScaleComponent>(otherEntity, new TweenScaleComponent(1, 0.1f, scaleDownDuration)); 
