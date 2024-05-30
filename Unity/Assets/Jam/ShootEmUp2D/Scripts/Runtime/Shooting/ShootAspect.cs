@@ -33,6 +33,15 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
         readonly RefRW<WeaponComponent> weaponComponent;
         readonly RefRO<LocalTransform> weaponTransform;
 
+        public void Pickup(Entity entity)
+        {
+            weaponComponent.ValueRW.BulletFireRate *= 0.5f;
+            weaponComponent.ValueRW.BulletFireRate = math.clamp(weaponComponent.ValueRW.BulletFireRate, 0.05f, 1.0f);
+
+            weaponComponent.ValueRW.BulletSpeed *= 1.1f;
+            weaponComponent.ValueRW.BulletSpeed = math.clamp(weaponComponent.ValueRW.BulletSpeed, 1.0f, 100.0f);
+        }
+
         public bool TryShoot(ref EntityCommandBuffer ecb, TimeData time)
         {
             if (time.ElapsedTime < weaponComponent.ValueRO._NextCooldownTime)

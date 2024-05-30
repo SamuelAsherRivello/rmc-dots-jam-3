@@ -73,8 +73,8 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             
             ///////////////////////////////////////
             // 1. Player Detecting Other Things...
-            foreach (var (dynamicBuffer, healthComponentAspect, playerEntity) in 
-                     SystemAPI.Query<DynamicBuffer<StatefulTriggerEvent>, HealthComponentAspect> ().
+            foreach (var (dynamicBuffer, healthComponentAspect, shootAspect, playerEntity) in 
+                     SystemAPI.Query<DynamicBuffer<StatefulTriggerEvent>, HealthComponentAspect, ShootAspect> ().
                          WithAll<PlayerTag>().
                          WithEntityAccess())
             {
@@ -88,7 +88,8 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                         // Player hit Pickup
                         if (_pickupTagLookup.HasComponent(otherEntity))
                         {
-                           // Debug.Log("Player Hit Pickup");
+                            shootAspect.Pickup(otherEntity);
+                            DestroyableEntityUtility.DestroyEntity(ecb, _destroyEntityComponentLookup, 0.0f, otherEntity);
                         }
                         
                         // Player hit Enemy
