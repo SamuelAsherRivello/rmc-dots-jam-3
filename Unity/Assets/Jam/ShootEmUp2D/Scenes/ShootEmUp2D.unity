@@ -164,6 +164,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _common: {fileID: 1362546962}
   _subScene: {fileID: 1345535642}
+  _backgrounds:
+  - {fileID: 1511053291}
+  - {fileID: 2047794069}
   IsDebugLog: 0
   IsDebugWaves: 1
 --- !u!1 &1167784634
@@ -465,6 +468,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a1ea88fbc9be6e448bf45f8a6feeefa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1511053291 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6756000716297832077, guid: 26053b46046d9e94d85939e2637b1106,
+    type: 3}
+  m_PrefabInstance: {fileID: 5793141841205708957}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 893003ff8a91fc24b8b68b23fc5263d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1661767978
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,6 +511,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2047794069 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2918532722455725673, guid: 2c612f76ea4d7874d82b8b65fb5aeedf,
+    type: 3}
+  m_PrefabInstance: {fileID: 5704472905046906440}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 893003ff8a91fc24b8b68b23fc5263d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5704472905046906440
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -45,6 +45,27 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             }
         }
 
+        public bool IsPaused
+        {
+            get
+            {
+                return _isPaused;
+            }
+            set
+            {
+                _isPaused = value;
+
+                if (_isPaused)
+                {
+                    ScrollSpeed = new Vector2();
+                }
+                else
+                {
+                    ScrollSpeed = _initialScrollSpeed;
+                }
+            }
+        } 
+
         //  Fields ----------------------------------------
         [SerializeField] 
         private Renderer _renderer;
@@ -54,8 +75,10 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
         
         [SerializeField]
         private Vector2 _initialScrollSpeed =  new Vector2(0, 0.1f);
-        
-        
+
+        private bool _isPaused = false;
+
+
         //  Unity Methods ---------------------------------
         protected void Start()
         {

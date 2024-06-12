@@ -1,12 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using RMC.Audio;
-using RMC.Core.Utilities;
 using RMC.DOTS.Samples.Games.ShootEmUp2D.StateMachines.EnemyStateMachine;
 using RMC.DOTS.Systems.GameState;
 using RMC.DOTS.Systems.Scoring;
 using RMC.DOTS.Utilities;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Scenes;
 using UnityEngine;
@@ -45,12 +44,17 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
         
         
         //  Fields ----------------------------------------
+        [Header("Scene References")]
         [SerializeField] 
         private Common _common;
 
         [SerializeField] 
         private SubScene _subScene;
 
+        [SerializeField] 
+        private List<Background> _backgrounds;
+        
+        [Header("Settings")]
         [Tooltip("True, to show debug logs")]
         [SerializeField] 
         private bool IsDebugLog = false;
@@ -238,7 +242,9 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 
         private void GameStateSystem_OnIsGamePausedChanged(bool isGamePaused)
         {
-            IsEnabledSimulationSystemGroup = !isGamePaused;;
+            IsEnabledSimulationSystemGroup = !isGamePaused;
+            
+            _backgrounds.ForEach(x => x.IsPaused = isGamePaused);
         }
         
         
