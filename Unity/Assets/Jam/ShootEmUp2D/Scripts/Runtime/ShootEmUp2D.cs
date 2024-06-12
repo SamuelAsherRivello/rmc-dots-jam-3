@@ -64,6 +64,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
         private bool IsDebugWaves = false;
 
         private GameStateSystem _gameStateSystem;
+        private PlayerMoveSystem _playerMoveSystem;
         private World _ecsWorld;
         private ScoringSystem _scoringSystem;
         private int _enemyKillsThisRoundCurrent;
@@ -80,7 +81,10 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             _gameStateSystem.OnIsGameOverChanged += GameStateSystem_OnIsGameOverChanged;
             _gameStateSystem.OnIsGamePausedChanged += GameStateSystem_OnIsGamePausedChanged;
             _gameStateSystem.OnGameStateChanged += GameStateSystem_OnGameStateChanged;
-            
+
+            // Player Input/Movement
+            _playerMoveSystem = _ecsWorld.GetExistingSystemManaged<PlayerMoveSystem>();
+
             // Enemy Killed
             // WasHitSystem wasHitSystem = _ecsWorld.GetExistingSystemManaged<WasHitSystem>();
             // wasHitSystem.OnWasHit += WasHitSystem_OnWasHit;
@@ -93,8 +97,11 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             _common.MainUI.OnRestartRequest.AddListener(MainUI_OnRestartRequest);
             _common.MainUI.OnRestartConfirm.AddListener(MainUI_OnRestartConfirm);
             _common.MainUI.OnRestartCancel.AddListener(MainUI_OnRestartCancel);
-            
-            
+
+            _common.MainUI.OnSwitchWeaponOne.AddListener(MainUI_OnSwitchWeaponOne);
+            _common.MainUI.OnSwitchWeaponTwo.AddListener(MainUI_OnSwitchWeaponTwo);
+            _common.MainUI.OnSwitchWeaponThree.AddListener(MainUI_OnSwitchWeaponThree);
+
             // Populate UI
             RefreshWaveProgressLabel();
             ScoresEventSystem_OnScoresChanged(default(ScoringComponent));
@@ -309,5 +316,19 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             await DOTSUtility.ReloadWorldAsync(_subScene);
         }
 
+        private void MainUI_OnSwitchWeaponOne()
+        {
+            _playerMoveSystem.CurrentActiveWeaponSlot = 0;
+        }
+        
+        private void MainUI_OnSwitchWeaponTwo()
+        {
+            _playerMoveSystem.CurrentActiveWeaponSlot = 1;
+        }
+
+        private void MainUI_OnSwitchWeaponThree()
+        {
+            _playerMoveSystem.CurrentActiveWeaponSlot = 2;
+        }
     }
 }

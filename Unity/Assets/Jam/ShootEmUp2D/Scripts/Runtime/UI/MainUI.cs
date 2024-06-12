@@ -11,10 +11,13 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
     /// <summary>
     /// The View handles user interface and user input
     /// </summary>
-    public class MainUI: MonoBehaviour
+    public class MainUI : MonoBehaviour
     {
         //  Events ----------------------------------------
         public readonly UnityEvent OnRestartRequest = new UnityEvent();
+        public readonly UnityEvent OnSwitchWeaponOne = new UnityEvent();
+        public readonly UnityEvent OnSwitchWeaponTwo = new UnityEvent();
+        public readonly UnityEvent OnSwitchWeaponThree = new UnityEvent();
         public readonly UnityEvent OnRestartConfirm = new UnityEvent();
         public readonly UnityEvent OnRestartCancel = new UnityEvent();
 
@@ -24,6 +27,9 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
         public Label WaveTitleLabel { get { return _uiDocument?.rootVisualElement?.Q<Label>("WaveTitleLabel");} }
         public Label WaveProgressLabel { get { return _uiDocument?.rootVisualElement?.Q<Label>("WaveProgressLabel");} }
         public Button RestartButton { get { return _uiDocument?.rootVisualElement?.Q<Button>("RestartButton");} }
+        public Button WeaponButtonOne { get { return _uiDocument?.rootVisualElement?.Q<Button>("WeaponButtonOne"); } }
+        public Button WeaponButtonTwo { get { return _uiDocument?.rootVisualElement?.Q<Button>("WeaponButtonTwo"); } }
+        public Button WeaponButtonThree { get { return _uiDocument?.rootVisualElement?.Q<Button>("WeaponButtonThree"); } }
 
         //  Fields ----------------------------------------
         [SerializeField] 
@@ -41,7 +47,6 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             _dialogVisualElement.BodyLabel.text = "Are You Sure?";
             _dialogVisualElement.IsVisible = false;
             
-            
             RestartButton.clicked += RestartButton_OnClicked;
             
             _uiDocument.rootVisualElement.RegisterCallback<KeyDownEvent>(evt =>
@@ -54,6 +59,10 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                     evt.StopImmediatePropagation();
                 }
             }, TrickleDown.TrickleDown);
+          
+            WeaponButtonOne.clicked += SwitchWeaponOne_OnClicked;
+            WeaponButtonTwo.clicked += SwitchWeaponTwo_OnClicked;
+            WeaponButtonThree.clicked += SwitchWeaponThree_OnClicked;
         }
 
         //  Methods ---------------------------------------
@@ -65,7 +74,22 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             _dialogVisualElement.IsVisible = true;
             OnRestartRequest.Invoke();
         }
-        
+
+        private void SwitchWeaponOne_OnClicked()
+        {
+            OnSwitchWeaponOne.Invoke();
+        }
+
+        private void SwitchWeaponTwo_OnClicked()
+        {
+            OnSwitchWeaponTwo.Invoke();
+        }
+
+        private void SwitchWeaponThree_OnClicked()
+        {
+            OnSwitchWeaponThree.Invoke();
+        }
+
         private void DialogUI_OnConfirm()
         {
             _dialogVisualElement.IsVisible = false;

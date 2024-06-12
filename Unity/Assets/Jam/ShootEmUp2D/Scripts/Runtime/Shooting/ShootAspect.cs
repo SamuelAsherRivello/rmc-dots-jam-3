@@ -55,6 +55,17 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             SwitchToWeapon(newWeaponType);
         }
 
+        public int GetWeaponSlot()
+        {
+            switch (weaponComponent.ValueRO.Type)
+            {
+                case WeaponType.SINGLE_SHOT: return 0;
+                case WeaponType.SHOTGUN_SPREAD: return 1;
+                case WeaponType.TRIPLE_SHOT: return 2;
+            }
+
+            return -1;
+        }
 
         private void SwitchToWeapon(WeaponType weaponType)
         {

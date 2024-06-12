@@ -1,7 +1,11 @@
 ﻿using RMC.DOTS.SystemGroups;
+using RMC.DOTS.Systems.GameState;
 using RMC.DOTS.Systems.Input;
 using RMC.DOTS.Systems.Player;
+using RMC.DOTS.Systems.VFX;
+using System.Linq;
 using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
@@ -14,15 +18,17 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
     /// This system moves the player in 3D space.
     /// </summary>
     [UpdateInGroup(typeof(UnpauseablePresentationSystemGroup))]
-    public partial struct PlayerMoveSystem : ISystem
+    public partial class PlayerMoveSystem : SystemBase
     {
-        public void OnCreate(ref SystemState state)
+        private ComponentLookup<WeaponComponent> _weaponComponentLookup;
+
+
+        protected override void OnCreate()
         {
-            state.RequireForUpdate<InputComponent>();
+            RequireForUpdate<InputComponent>();
         }
 
-        [BurstCompile]
-        public void OnUpdate(ref SystemState state)
+        protected override void OnUpdate()
         {
             float2 move = SystemAPI.GetSingleton<InputComponent>().MoveFloat2;
             float2 look = SystemAPI.GetSingleton<InputComponent>().LookFloat2;
@@ -57,6 +63,34 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                     shootAspect.SwitchToWeaponInSlot(1);
                 else if (Input.GetKeyDown(KeyCode.Alpha3))
                     shootAspect.SwitchToWeaponInSlot(2);
+            }
+        }
+
+        public int CurrentActiveWeaponSlot
+        {
+            get
+            {
+                EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+                EntityQueryBuilder entityQueryBuilder = new EntityQueryBuilder(Allocator.Temp).WithAspect<ShootAspect>().WithAll<PlayerTag>();
+                EntityQuery query = entityQueryBuilder.Build(entityManager);
+                var entities = query.ToEntityArray(Allocator.Temp);
+                if (entities.Length == 0)
+                    return -1;
+
+                ShootAspect shootAspect = entityManager.GetAspect<ShootAspect>(entities[0]);
+                return shootAspect.GetWeaponSlot();
+            }
+            set
+            {
+                EntityManager entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+                EntityQueryBuilder entityQueryBuilder = new EntityQueryBuilder(Allocator.Temp).WithAspect<ShootAspect>().WithAll<PlayerTag>();
+                EntityQuery query = entityQueryBuilder.Build(entityManager);
+                var entities = query.ToEntityArray(Allocator.Temp);
+                if (entities.Length == 0)
+                    return;
+
+                ShootAspect shootAspect = entityManager.GetAspect<ShootAspect>(entities[0]);
+                shootAspect.SwitchToWeaponInSlot(value);
             }
         }
     }
