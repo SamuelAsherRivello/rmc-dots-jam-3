@@ -356,9 +356,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a04a86b2ed83b4cb267088ead15432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WaitDurationInSeconds: 5
+  WaitDurationInSeconds: 10
   MoveOffset: {x: 0, y: -0.5, z: 0}
-  MoveSpeed: 10
+  MoveSpeed: 5
 --- !u!114 &2674057939795950381
 MonoBehaviour:
   m_ObjectHideFlags: 0
