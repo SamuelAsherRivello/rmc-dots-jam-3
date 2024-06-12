@@ -686,8 +686,8 @@ MonoBehaviour:
       x: 0
       y: 0
   Sorting:
-    StaticSorting: 0
-    SortingIndex: 0
+    StaticSorting: 1
+    SortingIndex: 1
     SortingLayer: 0
 --- !u!1 &1935476663
 GameObject:

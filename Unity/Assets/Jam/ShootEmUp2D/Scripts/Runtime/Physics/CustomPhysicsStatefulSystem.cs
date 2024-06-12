@@ -21,7 +21,11 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
     public partial struct CustomPhysicsStatefulSystem : ISystem
     {
         //TODO: Make a better way to 'have any system increment a counter' (Put in RandomComponent?)
-        private int _tempPitchCount;
+        private int _enemyBulletGunHitPitchCounter;
+        private int _playerBulletGunHitPitchCounter;
+        private int _pickupHitPitchCounter;
+        
+        
         
         // Things PLAYER might hit (Including ENEMY)
         private ComponentLookup<PickupTag> _pickupTagLookup;
@@ -99,10 +103,13 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                             shootAspect.Pickup(otherEntity);
                             
                             // Play sound
+                            float pitch = ShootEmUp2DConstants.PickupHitPitches[++_pickupHitPitchCounter % ShootEmUp2DConstants.PickupHitPitches.Length];
                             var audioEntity = ecb.CreateEntity();
                             ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
                             (
-                                ShootEmUp2DConstants.Pickup03
+                                ShootEmUp2DConstants.Pickup03,
+                                AudioConstants.VolumeDefault + 0.5f, // This is louder
+                                pitch
                             ));
                             
                             // Scale Up Pickup
@@ -141,12 +148,11 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 							DestroyableEntityUtility.DestroyEntity(ecb, _destroyEntityComponentLookup, scaleDownBulletDuration, otherEntity);
 
 							// Play sound
-							float[] pitches = { 0.8f, 1.0f };
-							float pitch = pitches[++_tempPitchCount % 2];
+							float pitch = ShootEmUp2DConstants.EnemyBulletGunHitPitches[++_enemyBulletGunHitPitchCounter % ShootEmUp2DConstants.EnemyBulletGunHitPitches.Length];
 							var audioEntity = ecb.CreateEntity();
 							ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
 							(
-                                ShootEmUp2DConstants.GunHit02,
+                                ShootEmUp2DConstants.GunHit03,
 								AudioConstants.VolumeDefault,
 								pitch
 							));
@@ -175,12 +181,11 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                         if (_playerBulletTagLookup.HasComponent(otherEntity))
                         {
                             // Play sound
-                            float[] pitches = { 0.8f, 1.0f };
-                            float pitch = pitches[++_tempPitchCount % 2];
+                            float pitch = ShootEmUp2DConstants.PlayerBulletGunHitPitches[++_playerBulletGunHitPitchCounter % ShootEmUp2DConstants.PlayerBulletGunHitPitches.Length];
                             var audioEntity = ecb.CreateEntity();
                             ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
                             (
-                                ShootEmUp2DConstants.GunHit02,
+                                ShootEmUp2DConstants.GunHit03,
                                 AudioConstants.VolumeDefault,
                                 pitch
                             ));

@@ -12,7 +12,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
     public partial struct PlayerShootSystem : ISystem
     {
         //TODO: Make a better way to 'have any system increment a counter' (Put in RandomComponent?)
-        private int _tempPitchCount;
+        private int _playerShootPitchCounter;
         
         public void OnCreate(ref SystemState state)
         {
@@ -53,10 +53,9 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                 if (!playerShootAspect.TryShoot(ref ecb, SystemAPI.Time))
                     continue;
                 
-                float[] pitches = { 0.8f, 0.9f, 1.0f, 1.1f };
-                float pitch = pitches[++_tempPitchCount % 4];
 
                 // Play sound
+                float pitch = ShootEmUp2DConstants.PlayerShootPitches[++_playerShootPitchCounter % ShootEmUp2DConstants.PlayerShootPitches.Length];
                 var audioEntity = ecb.CreateEntity();
                 ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
                 (
