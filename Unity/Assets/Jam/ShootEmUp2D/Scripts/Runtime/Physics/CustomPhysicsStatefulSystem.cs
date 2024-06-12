@@ -74,16 +74,16 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             ///////////////////////////////////////
             // 1. Player Detecting Other Things...
             foreach (var (dynamicBuffer, healthComponentAspect, shootAspect, playerEntity) in 
-                     SystemAPI.Query<DynamicBuffer<StatefulTriggerEvent>, HealthComponentAspect, ShootAspect> ().
+                     SystemAPI.Query<DynamicBuffer<StatefulCollisionEvent>, HealthComponentAspect, ShootAspect> ().
                          WithAll<PlayerTag>().
                          WithEntityAccess())
             {
                 for (int bufferIndex = 0; bufferIndex < dynamicBuffer.Length; bufferIndex++) 
                 {
-                    StatefulTriggerEvent statefulTriggerEvent = dynamicBuffer[bufferIndex];
-                    if (statefulTriggerEvent.State == StatefulEventState.Enter)
+                    StatefulCollisionEvent statefulEvent = dynamicBuffer[bufferIndex];
+                    if (statefulEvent.State == StatefulEventState.Enter)
                     {
-                        var otherEntity = statefulTriggerEvent.GetOtherEntity(playerEntity);
+                        var otherEntity = statefulEvent.GetOtherEntity(playerEntity);
                         
                         // Player hit Pickup
                         if (_pickupTagLookup.HasComponent(otherEntity))
@@ -148,16 +148,16 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             ///////////////////////////////////////
             // 2. Enemy Detecting Other Things...
             foreach (var (dynamicBuffer, healthComponentAspect, enemyEntity) in 
-                     SystemAPI.Query<DynamicBuffer<StatefulTriggerEvent>,HealthComponentAspect>().
+                     SystemAPI.Query<DynamicBuffer<StatefulCollisionEvent>,HealthComponentAspect>().
                          WithAll<EnemyTag>().
                          WithEntityAccess())
             {
                 for (int bufferIndex = 0; bufferIndex < dynamicBuffer.Length; bufferIndex++) 
                 {
-                    StatefulTriggerEvent statefulTriggerEvent = dynamicBuffer[bufferIndex];
-                    if (statefulTriggerEvent.State == StatefulEventState.Enter)
+                    StatefulCollisionEvent statefulEvent = dynamicBuffer[bufferIndex];
+                    if (statefulEvent.State == StatefulEventState.Enter)
                     {
-                        var otherEntity = statefulTriggerEvent.GetOtherEntity(enemyEntity);
+                        var otherEntity = statefulEvent.GetOtherEntity(enemyEntity);
                         
                         if (_playerBulletTagLookup.HasComponent(otherEntity))
                         {

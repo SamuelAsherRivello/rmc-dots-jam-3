@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7451659516851321082}
   - component: {fileID: 6736707263942637426}
   - component: {fileID: 8375823517850075721}
-  - component: {fileID: 8872598778131830309}
+  - component: {fileID: 6446545176940747980}
   - component: {fileID: 8506131590433889887}
   - component: {fileID: 7706728946375401090}
   - component: {fileID: -808930852943113587}
@@ -193,7 +193,7 @@ MonoBehaviour:
     m_Template: {fileID: 0}
     m_CollisionResponse:
       m_Override: 0
-      m_Value: 3
+      m_Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -287,7 +287,7 @@ MonoBehaviour:
         Tag07: 0
     m_SerializedVersion: 1
   m_SerializedVersion: 1
---- !u!114 &8872598778131830309
+--- !u!114 &6446545176940747980
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,11 +296,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7540849224055706549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71242163ba188c04b8b904b94ff79242, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a444254202384e4ea55b4fe97742fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _physicsBodyAuthoring: {fileID: 6736707263942637426}
   _physicsShapeAuthoring: {fileID: 8375823517850075721}
+  CalculateDetails: 0
 --- !u!114 &8506131590433889887
 MonoBehaviour:
   m_ObjectHideFlags: 0

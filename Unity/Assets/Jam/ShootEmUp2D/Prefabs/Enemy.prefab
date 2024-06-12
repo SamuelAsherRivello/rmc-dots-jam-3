@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3409344557983688220}
   - component: {fileID: 3721317070430586114}
   - component: {fileID: 1710891036720127906}
-  - component: {fileID: 1952408193462462555}
+  - component: {fileID: 5433064596360644463}
   - component: {fileID: -1176639490386674444}
   - component: {fileID: -738633149000637761}
   - component: {fileID: -9103040436822722462}
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MotionType: 0
   m_Smoothing: 0
-  m_Mass: 1
+  m_Mass: 99
   m_LinearDamping: 0.01
   m_AngularDamping: 0.05
   m_InitialLinearVelocity:
@@ -195,7 +195,7 @@ MonoBehaviour:
     m_Template: {fileID: 0}
     m_CollisionResponse:
       m_Override: 0
-      m_Value: 3
+      m_Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe65721c488203499e32c67c6ed6f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1952408193462462555
+--- !u!114 &5433064596360644463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -310,11 +310,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 701181624954122511}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71242163ba188c04b8b904b94ff79242, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a444254202384e4ea55b4fe97742fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _physicsBodyAuthoring: {fileID: 3409344557983688220}
   _physicsShapeAuthoring: {fileID: 3721317070430586114}
+  CalculateDetails: 0
 --- !u!114 &-1176639490386674444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaitDurationInSeconds: 5
   MoveOffset: {x: 0, y: -0.5, z: 0}
-  MoveSpeed: 2
+  MoveSpeed: 10
 --- !u!114 &2674057939795950381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,7 +374,7 @@ MonoBehaviour:
   BulletPrefab: {fileID: 476130938467176857, guid: 3f89c6ba7bb82aa45b29b07b1900cceb,
     type: 3}
   BulletSpeed: 2
-  BulletFireRate: 1
+  BulletFireRate: 5
   MuzzleFlashPrefab: {fileID: 7425059789186097586, guid: 27fb8ca83d4801748a2e8c37adf228c4,
     type: 3}
   ShootDirectionIsUp: 0
