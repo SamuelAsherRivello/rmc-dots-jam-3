@@ -2652,6 +2652,16 @@ PrefabInstance:
       propertyPath: LinearSpeed
       value: 4000
       objectReference: {fileID: 0}
+    - target: {fileID: 6175048376264708696, guid: a1bd441edf8f09c4da06808f49601c86,
+        type: 3}
+      propertyPath: PositionOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6175048376264708696, guid: a1bd441edf8f09c4da06808f49601c86,
+        type: 3}
+      propertyPath: PositionOffset.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

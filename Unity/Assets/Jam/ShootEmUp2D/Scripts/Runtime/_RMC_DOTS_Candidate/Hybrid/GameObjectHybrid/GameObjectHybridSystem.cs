@@ -37,7 +37,8 @@ namespace RMC.DOTS.Systems.Health
                 //sync. Works great
                 if (!gameObjectHybridComponent.GameObject.transform.position.Equals(localTransform.ValueRO.Position))
                 {
-                    gameObjectHybridComponent.GameObject.transform.position = localTransform.ValueRO.Position;
+                    gameObjectHybridComponent.GameObject.transform.position =
+                        localTransform.ValueRO.Position + gameObjectHybridComponent.PositionOffset;
                 }
                 
             }
