@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 1499936147962869613}
   - component: {fileID: -8694509304791850139}
   - component: {fileID: -152369647753751551}
-  - component: {fileID: 6548588841877984057}
   - component: {fileID: 2083537987363122719}
   - component: {fileID: -701842677391348566}
   - component: {fileID: -5525696722251327020}
+  - component: {fileID: 950028714865890538}
   m_Layer: 0
   m_Name: Pickup
   m_TagString: Untagged
@@ -82,8 +82,8 @@ SpriteRenderer:
   m_SortingLayerID: 812206027
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5e66238b77325d548b698ee1e7a0a60e, type: 3}
-  m_Color: {r: 0, g: 0.3091445, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 5e832108ff7b2bb499626fe990b5745a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -162,9 +162,9 @@ MonoBehaviour:
     y: 0
     z: 0
   m_PrimitiveSize:
-    x: 1
+    x: 0.5845916
     y: 0
-    z: 1
+    z: 0.6779914
   m_PrimitiveOrientation:
     Value:
       x: -90
@@ -172,15 +172,15 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 1
-    Radius: 0.5
+    Height: 0.6779914
+    Radius: 0.2922958
     Axis: 2
   m_Cylinder:
     Height: 0
-    Radius: 0.5
+    Radius: 0.3389957
     Axis: 1
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.5
+  m_SphereRadius: 0.3389957
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
     m_SimplificationTolerance: 0.015
@@ -193,7 +193,7 @@ MonoBehaviour:
     m_Template: {fileID: 0}
     m_CollisionResponse:
       m_Override: 0
-      m_Value: 3
+      m_Value: 1
     m_Friction:
       m_Override: 0
       m_Value:
@@ -287,20 +287,6 @@ MonoBehaviour:
         Tag07: 0
     m_SerializedVersion: 1
   m_SerializedVersion: 1
---- !u!114 &6548588841877984057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1287726712386871147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71242163ba188c04b8b904b94ff79242, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _physicsBodyAuthoring: {fileID: -8694509304791850139}
-  _physicsShapeAuthoring: {fileID: -152369647753751551}
 --- !u!114 &2083537987363122719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,3 +331,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PickupLinearSpeed: 0
+--- !u!114 &950028714865890538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1287726712386871147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a444254202384e4ea55b4fe97742fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _physicsBodyAuthoring: {fileID: -8694509304791850139}
+  _physicsShapeAuthoring: {fileID: -152369647753751551}
+  CalculateDetails: 0

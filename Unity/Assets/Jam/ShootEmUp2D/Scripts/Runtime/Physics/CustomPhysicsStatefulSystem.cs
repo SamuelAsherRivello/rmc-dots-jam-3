@@ -65,9 +65,6 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             _vfxEmitterComponentLookup.Update(ref state);
             _localTransformLookup.Update(ref state);
             
-            //
-            _tempPitchCount++;
-            
             var ecb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>().
                 CreateCommandBuffer(state.WorldUnmanaged);
             
@@ -85,25 +82,43 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                     {
                         var otherEntity = statefulEvent.GetOtherEntity(playerEntity);
                         
-                        // Player hit Pickup
-                        if (_pickupTagLookup.HasComponent(otherEntity))
-                        {
-                            shootAspect.Pickup(otherEntity);
-                            DestroyableEntityUtility.DestroyEntity(ecb, _destroyEntityComponentLookup, 0.0f, otherEntity);
-                        }
-                        
                         // Player hit Enemy
                         if (_enemyTagLookup.HasComponent(otherEntity))
                         {
-                           // Debug.Log("Player's plane Hit Enemy plane");
+                            // Debug.Log("Player's plane Hit Enemy plane");
                         }
+                        
+                        
+                        // Player hit Pickup
+                        if (_pickupTagLookup.HasComponent(otherEntity))
+                        {
+                            
+                            ///////////////////////////////////
+                            // HIT BY PICKUP
+                            ///////////////////////////////////
+                            shootAspect.Pickup(otherEntity);
+                            
+                            // Play sound
+                            var audioEntity = ecb.CreateEntity();
+                            ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
+                            (
+                                ShootEmUp2DConstants.Pickup03
+                            ));
+                            
+                            // Scale Up Pickup
+                            float scaleUpPickupDuration = ShootEmUp2DConstants.ScaleUpDuration;
+                            ecb.RemoveComponent<PhysicsCollider>(otherEntity);
+                            ecb.AddComponent<TweenScaleComponent>(otherEntity, new TweenScaleComponent(1, 2, scaleUpPickupDuration));
+                            DestroyableEntityUtility.DestroyEntity(ecb, _destroyEntityComponentLookup, scaleUpPickupDuration, otherEntity);
+                        }
+                        
                         
                         // Player hit EnemyBullet
                         if (_enemyBulletTagLookup.HasComponent(otherEntity))
                         {
 
 							///////////////////////////////////
-							// ENEMY
+							// HIT BY ENEMY BULLET
 							///////////////////////////////////
 							// Take Damage
 							healthComponentAspect.HealthChangeBy(ecb, -3.5f); //about 30 bullets = death
@@ -120,10 +135,10 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 								_localTransformLookup.GetRefRO(otherEntity).ValueRO.Position);
 
 							// Scale Down Bullet
-							float scaleDownDuration = 0.25f;
+                            float scaleDownBulletDuration = ShootEmUp2DConstants.ScaleDownDuration;
 							ecb.RemoveComponent<PhysicsCollider>(otherEntity);
-							ecb.AddComponent<TweenScaleComponent>(otherEntity, new TweenScaleComponent(1, 0.1f, scaleDownDuration));
-							DestroyableEntityUtility.DestroyEntity(ecb, _destroyEntityComponentLookup, scaleDownDuration, otherEntity);
+							ecb.AddComponent<TweenScaleComponent>(otherEntity, new TweenScaleComponent(1, 0.1f, scaleDownBulletDuration));
+							DestroyableEntityUtility.DestroyEntity(ecb, _destroyEntityComponentLookup, scaleDownBulletDuration, otherEntity);
 
 							// Play sound
 							float[] pitches = { 0.8f, 1.0f };
@@ -131,16 +146,14 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
 							var audioEntity = ecb.CreateEntity();
 							ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
 							(
-								"GunHit02",
+                                ShootEmUp2DConstants.GunHit02,
 								AudioConstants.VolumeDefault,
 								pitch
 							));
-
-
 						}
                         
                         // Great info via debug tooling
-                        //PhysicsStatefulDebugSystem.LogEvent(ref state, entity, bufferIndex, statefulTriggerEvent);
+                        //PhysicsStatefulDebugSystem.LogEvent(ref state, playerEntity, bufferIndex, statefulEvent);
                     }
                 }
             }
@@ -167,13 +180,13 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                             var audioEntity = ecb.CreateEntity();
                             ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
                             (
-                                "GunHit02",
+                                ShootEmUp2DConstants.GunHit02,
                                 AudioConstants.VolumeDefault,
                                 pitch
                             ));
                             
                             ///////////////////////////////////
-                            // ENEMY
+                            // HIT BY PLAYER BULLET
                             ///////////////////////////////////
                             // Take Damage
                             healthComponentAspect.HealthChangeBy(ecb,-35); //about 3 bullets = death
@@ -190,12 +203,15 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                                 _localTransformLookup.GetRefRO(otherEntity).ValueRO.Position);
                             
                             // Scale Down Bullet
-                            float scaleDownDuration = 0.25f;
+                            float scaleDownBulletDuration = ShootEmUp2DConstants.ScaleDownDuration;
                             ecb.RemoveComponent<PhysicsCollider>(otherEntity);
-                            ecb.AddComponent<TweenScaleComponent>(otherEntity, new TweenScaleComponent(1, 0.1f, scaleDownDuration)); 
-                            DestroyableEntityUtility.DestroyEntity(ecb, _destroyEntityComponentLookup, scaleDownDuration, otherEntity);
+                            ecb.AddComponent<TweenScaleComponent>(otherEntity, new TweenScaleComponent(1, 0.1f, scaleDownBulletDuration)); 
+                            DestroyableEntityUtility.DestroyEntity(ecb, _destroyEntityComponentLookup, scaleDownBulletDuration, otherEntity);
 
 						}
+                        
+                        // Great info via debug tooling
+                        //PhysicsStatefulDebugSystem.LogEvent(ref state, enemyEntity, bufferIndex, statefulEvent);
                     }
                 }
             }

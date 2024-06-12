@@ -60,7 +60,7 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
                 var audioEntity = ecb.CreateEntity();
                 ecb.AddComponent<AudioComponent>(audioEntity, new AudioComponent
                 (
-                    "GunShot01",
+                    ShootEmUp2DConstants.GunShot01,
                     AudioConstants.VolumeDefault,
                     pitch
                 ));

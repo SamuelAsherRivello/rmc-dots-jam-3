@@ -76,7 +76,6 @@ namespace RMC.DOTS.Samples.Games.ShootEmUp2D
             _gameStateSystem.OnIsGameOverChanged += GameStateSystem_OnIsGameOverChanged;
             _gameStateSystem.OnIsGamePausedChanged += GameStateSystem_OnIsGamePausedChanged;
             _gameStateSystem.OnGameStateChanged += GameStateSystem_OnGameStateChanged;
-
             
             // Enemy Killed
             // WasHitSystem wasHitSystem = _ecsWorld.GetExistingSystemManaged<WasHitSystem>();

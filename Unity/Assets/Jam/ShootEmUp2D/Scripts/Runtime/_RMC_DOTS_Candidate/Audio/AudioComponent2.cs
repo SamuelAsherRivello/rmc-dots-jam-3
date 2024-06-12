@@ -9,5 +9,7 @@ namespace RMC.DOTS.Systems.Destroyable
         {
             return new AudioComponent(audioClipName);
         }
+        
+        //TODO: And think about using ints mutually available alternative for clipname
     }
 }
